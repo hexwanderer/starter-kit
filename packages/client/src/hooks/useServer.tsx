@@ -24,8 +24,10 @@ export const ServerStateProvider = forwardRef<
   }
 >(({ app, ...props }, ref) => {
   return (
-    <ServerContext.Provider value={{ app }} {...props}>
-      {ref ? <div ref={ref} /> : null}
+    <ServerContext.Provider value={{ app }}>
+      <div ref={ref} {...props}>
+        {props.children}
+      </div>
     </ServerContext.Provider>
   );
 });

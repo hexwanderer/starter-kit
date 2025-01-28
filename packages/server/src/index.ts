@@ -1,5 +1,3 @@
-import "@types/pg";
-import "drizzle-orm/node-postgres";
 import { Elysia } from "elysia";
 import { node } from "@elysiajs/node";
 import { db } from "@starter-kit/database";

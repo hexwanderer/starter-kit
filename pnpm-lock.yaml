@@ -104,6 +104,12 @@ importers:
       '@starter-kit/database':
         specifier: workspace:*
         version: link:../database
+      '@starter-kit/server':
+        specifier: workspace:*
+        version: link:../server
+      '@tanstack/react-query':
+        specifier: ^5.65.0
+        version: 5.65.0(react@19.0.0)
       '@tanstack/react-router':
         specifier: ^1.97.23
         version: 1.97.24(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -1981,6 +1987,14 @@ packages:
   '@tanstack/history@1.97.8':
     resolution: {integrity: sha512-+0R1Xe2lRLeK4htiLRCv0fyxDnrCQbK/ltrJ9rofUwMdh/jQ5+tjGBPzOlyUQzTZg7Rzv8NzVzQWuyxjQYga2g==}
     engines: {node: '>=12'}
+
+  '@tanstack/query-core@5.65.0':
+    resolution: {integrity: sha512-Bnnq/1axf00r2grRT6gUyIkZRKzhHs+p4DijrCQ3wMlA3D3TTT71gtaSLtqnzGddj73/7X5JDGyjiSLdjvQN4w==}
+
+  '@tanstack/react-query@5.65.0':
+    resolution: {integrity: sha512-qXdHj3SCT2xkFxgrBIe6y9Lkowlwm+tGcV++PBLFtyvEJR5Q+biTnzm5p0tdVwqA603xlju9mtV2Kd/2brobgA==}
+    peerDependencies:
+      react: ^18 || ^19
 
   '@tanstack/react-router@1.97.24':
     resolution: {integrity: sha512-9P9c/aHksxQgqX9CQTwXNljajnNfVdV3ApV13vzQB3EJf7dJuUaZBEzZ/IY/r6w2KMu8zzFqzaXJO2Y1d8wrmw==}
@@ -4756,6 +4770,13 @@ snapshots:
       tailwindcss: 4.0.0
 
   '@tanstack/history@1.97.8': {}
+
+  '@tanstack/query-core@5.65.0': {}
+
+  '@tanstack/react-query@5.65.0(react@19.0.0)':
+    dependencies:
+      '@tanstack/query-core': 5.65.0
+      react: 19.0.0
 
   '@tanstack/react-router@1.97.24(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:

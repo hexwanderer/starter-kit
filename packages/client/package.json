@@ -41,6 +41,7 @@
     "@radix-ui/react-tooltip": "^1.1.7",
     "@starter-kit/database": "workspace:*",
     "@starter-kit/server": "workspace:*",
+    "@tanstack/react-query": "^5.65.0",
     "@tanstack/react-router": "^1.97.23",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
