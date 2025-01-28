@@ -265,6 +265,9 @@ importers:
 
   packages/server:
     dependencies:
+      '@elysiajs/cors':
+        specifier: ^1.2.0
+        version: 1.2.0(elysia@1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3))
       '@elysiajs/node':
         specifier: ^1.2.3
         version: 1.2.3(elysia@1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3))(formidable@3.5.2)(ws@8.18.0)
@@ -442,6 +445,11 @@ packages:
 
   '@drizzle-team/brocli@0.10.2':
     resolution: {integrity: sha512-z33Il7l5dKjUgGULTqBsQBQwckHh5AbIuxhdsIxDDiZAzBOrZO6q9ogcWC65kU382AfynTfgNumVcNIjuIua6w==}
+
+  '@elysiajs/cors@1.2.0':
+    resolution: {integrity: sha512-qsJwDAg6WfdQRMfj6uSMcDPSpXvm/zQFeAX1uuJXhIgazH8itSfcDxcH9pMuXVRX1yQNi2pPwNQLJmAcw5mzvw==}
+    peerDependencies:
+      elysia: '>= 1.2.0'
 
   '@elysiajs/eden@1.2.0':
     resolution: {integrity: sha512-MpV45ahuF+iFZUg4tyJbLr9qxzY99m8clJVgQrDrz7Qh6eOKQ8MY6vjYMj3Wh21pTIRHPHzOLhVorRGby1/Owg==}
@@ -3538,6 +3546,10 @@ snapshots:
     optional: true
 
   '@drizzle-team/brocli@0.10.2': {}
+
+  '@elysiajs/cors@1.2.0(elysia@1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3))':
+    dependencies:
+      elysia: 1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3)
 
   '@elysiajs/eden@1.2.0(elysia@1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3))':
     dependencies:

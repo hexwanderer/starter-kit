@@ -68,6 +68,6 @@ The repository follows a modular architecture:
 ## TODOs
 
 - [ ] Properly document process for adding new packages.
-- [ ] Add CORS to server.
+- [X] Add CORS to server.
 - [ ] Verify server-client communication, particularly over Docker.
 - [ ] Add auth with Better Auth.

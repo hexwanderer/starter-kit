@@ -10,6 +10,7 @@
     "start": "NODE_ENV=production node dist/index.ts"
   },
   "dependencies": {
+    "@elysiajs/cors": "^1.2.0",
     "@elysiajs/node": "^1.2.3",
     "@starter-kit/database": "workspace:*",
     "@types/node": "^22.10.10",
