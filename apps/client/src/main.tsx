@@ -26,7 +26,7 @@ declare module "@tanstack/react-router" {
   }
 }
 
-const client = treaty<App>("/api");
+const serverClient = treaty<App>("/api");
 const queryClient = new QueryClient();
 const authClient = createAuthClient();
 
@@ -35,7 +35,7 @@ if (!rootElement) throw new Error("No root element found");
 
 const ProviderTree = buildProvidersTree([
   [QueryClientProvider, { client: queryClient }],
-  [ServerStateProvider, { app: client }],
+  [ServerStateProvider, { serverClient }],
   [AuthProvider, { authClient }],
   [SidebarProvider, {}],
   [ThemeProvider, {}],

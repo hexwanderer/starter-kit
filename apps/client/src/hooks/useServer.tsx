@@ -6,7 +6,7 @@ import { createContext, useContext } from "react";
 type ServerClient = ReturnType<typeof treaty<App>>;
 
 type ServerState = {
-  app: ServerClient;
+  serverClient: ServerClient;
 };
 
 const ServerContext = createContext<ServerState | null>(null);
@@ -21,15 +21,17 @@ export function useServer() {
 }
 
 interface ServerStateProviderProps {
-  app: ServerClient;
+  serverClient: ServerClient;
   children: ReactNode;
 }
 
 export function ServerStateProvider({
-  app,
+  serverClient,
   children,
 }: ServerStateProviderProps) {
   return (
-    <ServerContext.Provider value={{ app }}>{children}</ServerContext.Provider>
+    <ServerContext.Provider value={{ serverClient }}>
+      {children}
+    </ServerContext.Provider>
   );
 }

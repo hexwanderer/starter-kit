@@ -6,7 +6,7 @@ import { infiniteQueryOptions } from "@tanstack/react-query";
 export type EdenClient = ReturnType<typeof treaty<App>>;
 
 export const users = () => {
-  const { app } = useServer();
+  const { serverClient: app } = useServer();
 
   return {
     getAll: () =>
