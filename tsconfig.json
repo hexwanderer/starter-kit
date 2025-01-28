@@ -1,0 +1,22 @@
+{
+  // No "files" means the root won't compile any files by itself
+  "files": [],
+
+  // Each item in "references" points to the sub-project's tsconfig
+  "references": [
+    { "path": "./packages/database" },
+    { "path": "./packages/client" }
+  ],
+
+  // (Optional) You can specify compilerOptions here if you want
+  // them to apply across all referenced projects, or just
+  // keep this minimal and rely on each project's tsconfig.
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "paths": {
+      "@starter-kit/database": ["./packages/database"],
+    }
+  }
+}
