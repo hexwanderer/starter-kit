@@ -46,6 +46,8 @@ import {
   GalleryVerticalEnd,
   Settings2,
   SquareTerminal,
+  ChevronsRight,
+  ChevronsLeft,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
@@ -163,6 +165,7 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { open, toggleSidebar } = useSidebar();
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -172,6 +175,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton onClick={() => toggleSidebar()}>
+              {open ? <ChevronsLeft /> : <ChevronsRight />}
+              {open ? "Close" : "Open"}
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
         <NavUser user={data.user} />
       </SidebarFooter>
       <SidebarRail />

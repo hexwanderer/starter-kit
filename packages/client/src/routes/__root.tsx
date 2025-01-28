@@ -1,15 +1,28 @@
 import { AppSidebar } from "@/components/Sidebar";
-import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
 export const Route = createRootRoute({
-  component: () => (
-    <>
-      <AppSidebar />
-      <SidebarInset>
-        <div className="p-2 flex gap-2">
+  component: Root,
+});
+
+function Root() {
+  const { isMobile } = useSidebar();
+  return (
+    <div className="flex h-screen">
+      {/* Sidebar */}
+      <AppSidebar className="hidden lg:block w-64 bg-gray-800 text-white" />
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
+        {/* Sidebar Trigger */}
+        <div className={`fixed bottom-4 left-4 ${isMobile ? "" : "hidden"}`}>
           <SidebarTrigger />
+        </div>
+
+        {/* Navbar */}
+        <div className="p-2 flex gap-2">
           <Link to="/" className="[&.active]:font-bold">
             Home
           </Link>{" "}
@@ -18,9 +31,15 @@ export const Route = createRootRoute({
           </Link>
         </div>
         <hr />
-        <Outlet />
-        <TanStackRouterDevtools position="bottom-right" />
-      </SidebarInset>
-    </>
-  ),
-});
+
+        {/* Main Outlet Content */}
+        <div className="flex-1 overflow-y-auto">
+          <Outlet />
+        </div>
+      </div>
+
+      {/* TanStack Router DevTools */}
+      <TanStackRouterDevtools position="bottom-right" />
+    </div>
+  );
+}
