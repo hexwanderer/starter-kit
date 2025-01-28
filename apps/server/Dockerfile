@@ -17,7 +17,7 @@ RUN npm install -g pnpm
 RUN pnpm install
 
 # Set the working directory to the server package
-WORKDIR /app/packages/server
+WORKDIR /app/apps/server
 
 # Expose the port the application will run on
 EXPOSE 3000

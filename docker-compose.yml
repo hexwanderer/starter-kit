@@ -9,7 +9,7 @@ services:
   server:
     build:
       context: .
-      dockerfile: ./packages/server/Dockerfile
+      dockerfile: ./apps/server/Dockerfile
     ports:
       - "3000:3000"
     environment:
@@ -19,7 +19,7 @@ services:
   client:
     build:
       context: .
-      dockerfile: ./packages/client/Dockerfile
+      dockerfile: ./apps/client/Dockerfile
     ports:
       - "3001:3001"
     environment:

@@ -9,10 +9,7 @@ COPY . .
 # Install dependencies
 RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
-# Copy the rest of the application code
-COPY . .
-
-WORKDIR /app/packages/client
+WORKDIR /app/apps/client
 
 # Expose the port the application will run on
 EXPOSE 3001

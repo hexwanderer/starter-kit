@@ -3,7 +3,7 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" },
-    { "path": "../database" },
+    { "path": "../../packages/database" },
     { "path": "../server" }
   ],
   "compilerOptions": {
@@ -13,7 +13,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@starter-kit/database/*": ["../database/src/*"],
+      "@starter-kit/database/*": ["../../packages/database/src/*"],
       "@starter-kit/server/*": ["../server/src/*"]
     }
   },

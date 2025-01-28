@@ -5,8 +5,8 @@
   // Each item in "references" points to the sub-project's tsconfig
   "references": [
     { "path": "./packages/database" },
-    { "path": "./packages/client" },
-    { "path": "./packages/server" }
+    { "path": "./apps/client" },
+    { "path": "./apps/server" }
   ],
 
   // (Optional) You can specify compilerOptions here if you want
@@ -18,7 +18,7 @@
     "strict": true,
     "paths": {
       "@starter-kit/database": ["./packages/database"],
-      "@starter-kit/server": ["./packages/server"]
+      "@starter-kit/server": ["./apps/server"]
     }
   }
 }

@@ -28,7 +28,7 @@
       "@/*": [
         "./src/*"
       ],
-      "@starter-kit/database/*": ["../database/src/*"],
+      "@starter-kit/database/*": ["../../packages/database/src/*"],
       "@starter-kit/server/*": ["../server/src/*"]
     }
   },

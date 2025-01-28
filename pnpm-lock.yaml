@@ -12,7 +12,7 @@ importers:
         specifier: 1.9.4
         version: 1.9.4
 
-  packages/client:
+  apps/client:
     dependencies:
       '@elysiajs/eden':
         specifier: ^1.2.0
@@ -103,7 +103,7 @@ importers:
         version: 1.1.7(@types/react-dom@19.0.3(@types/react@19.0.8))(@types/react@19.0.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@starter-kit/database':
         specifier: workspace:*
-        version: link:../database
+        version: link:../../packages/database
       '@starter-kit/server':
         specifier: workspace:*
         version: link:../server
@@ -235,6 +235,40 @@ importers:
         specifier: ^6.0.5
         version: 6.0.11(@types/node@22.10.10)(jiti@2.4.2)(lightningcss@1.29.1)(tsx@4.19.2)
 
+  apps/server:
+    dependencies:
+      '@elysiajs/cors':
+        specifier: ^1.2.0
+        version: 1.2.0(elysia@1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3))
+      '@elysiajs/node':
+        specifier: ^1.2.3
+        version: 1.2.3(elysia@1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3))(formidable@3.5.2)(ws@8.18.0)
+      '@starter-kit/database':
+        specifier: workspace:*
+        version: link:../../packages/database
+      '@types/node':
+        specifier: ^22.10.10
+        version: 22.10.10
+      '@types/pg':
+        specifier: ^8.11.11
+        version: 8.11.11
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.4.7
+      drizzle-orm:
+        specifier: ^0.39.0
+        version: 0.39.0(@types/pg@8.11.11)(@types/react@19.0.8)(pg@8.13.1)(react@19.0.0)
+      elysia:
+        specifier: ^1.2.10
+        version: 1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3)
+      typescript:
+        specifier: ^5.7.3
+        version: 5.7.3
+    devDependencies:
+      tsx:
+        specifier: ^4.19.2
+        version: 4.19.2
+
   packages/database:
     dependencies:
       dotenv:
@@ -262,40 +296,6 @@ importers:
       typescript:
         specifier: ^5.7.3
         version: 5.7.3
-
-  packages/server:
-    dependencies:
-      '@elysiajs/cors':
-        specifier: ^1.2.0
-        version: 1.2.0(elysia@1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3))
-      '@elysiajs/node':
-        specifier: ^1.2.3
-        version: 1.2.3(elysia@1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3))(formidable@3.5.2)(ws@8.18.0)
-      '@starter-kit/database':
-        specifier: workspace:*
-        version: link:../database
-      '@types/node':
-        specifier: ^22.10.10
-        version: 22.10.10
-      '@types/pg':
-        specifier: ^8.11.11
-        version: 8.11.11
-      dotenv:
-        specifier: ^16.4.7
-        version: 16.4.7
-      drizzle-orm:
-        specifier: ^0.39.0
-        version: 0.39.0(@types/pg@8.11.11)(@types/react@19.0.8)(pg@8.13.1)(react@19.0.0)
-      elysia:
-        specifier: ^1.2.10
-        version: 1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3)
-      typescript:
-        specifier: ^5.7.3
-        version: 5.7.3
-    devDependencies:
-      tsx:
-        specifier: ^4.19.2
-        version: 4.19.2
 
 packages:
 
