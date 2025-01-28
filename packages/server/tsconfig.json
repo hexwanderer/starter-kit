@@ -1,26 +1,25 @@
 {
   "compilerOptions": {
     "composite": true,
-    "target": "ESNext",                         // Set to ES2020 or higher for modern JavaScript features
-    "module": "ESNext",                         // Use ESNext for ESM support
-    "moduleResolution": "Node",                 // Use Node.js's module resolution strategy
-    "esModuleInterop": true,                    // Enable interoperability between CommonJS and ESM
-    "forceConsistentCasingInFileNames": true,   // Enforce consistent casing in imports
     "strict": true,                             // Enable strict type-checking options
-    "skipLibCheck": true,                       // Skip type checking of declaration files (optional but helpful)
-    "outDir": "dist",                           // Output directory for compiled files
-    "rootDir": "src",                           // Root directory of input files
-    "resolveJsonModule": true,                  // Allow importing JSON files
-    "isolatedModules": true,                    // Ensure each file is treated as a separate module
+    "target": "ESNext",                         // Set to ES2020 or higher for modern JavaScript features
+    "module": "NodeNext",                       // Use ESNext for ESM support
+    "moduleResolution": "nodenext",             // Use Node.js's module resolution strategy
     "declaration": true,
     "declarationMap": true,
     "emitDeclarationOnly": true,
+    "outDir": "dist",                           // Output directory for compiled files
+    "esModuleInterop": true,                    // Enable interoperability between CommonJS and ESM
+    "skipLibCheck": true,                       // Skip type checking of declaration files (optional but helpful)
+    "forceConsistentCasingInFileNames": true,   // Enforce consistent casing in imports
+    "resolveJsonModule": true,                  // Allow importing JSON files
+    "baseUrl": ".",
     "paths": {
-      "@starter-kit/database/*": ["../database/src/*"]
+      "@starter-kit/server/*": ["./src/*"]
     }
   },
   "include": ["src/**/*"],                     // Include all .ts files in the src directory
-  "exclude": ["node_modules", "dist"],
+  "exclude": ["node_modules"],
   "references": [
     { "path": "../database" }
   ]

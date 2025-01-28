@@ -14,6 +14,9 @@ importers:
 
   packages/client:
     dependencies:
+      '@elysiajs/eden':
+        specifier: ^1.2.0
+        version: 1.2.0(elysia@1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3))
       '@hookform/resolvers':
         specifier: ^3.10.0
         version: 3.10.0(react-hook-form@7.54.2(react@19.0.0))
@@ -180,6 +183,9 @@ importers:
       '@types/node':
         specifier: ^22.10.10
         version: 22.10.10
+      '@types/pg':
+        specifier: ^8.11.11
+        version: 8.11.11
       '@types/react':
         specifier: ^19.0.8
         version: 19.0.8
@@ -189,6 +195,9 @@ importers:
       '@vitejs/plugin-react-swc':
         specifier: ^3.5.0
         version: 3.7.2(vite@6.0.11(@types/node@22.10.10)(jiti@2.4.2)(lightningcss@1.29.1)(tsx@4.19.2))
+      elysia:
+        specifier: ^1.2.10
+        version: 1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3)
       eslint:
         specifier: ^9.17.0
         version: 9.19.0(jiti@2.4.2)
@@ -250,9 +259,18 @@ importers:
       '@elysiajs/node':
         specifier: ^1.2.3
         version: 1.2.3(elysia@1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3))(formidable@3.5.2)(ws@8.18.0)
+      '@starter-kit/database':
+        specifier: workspace:*
+        version: link:../database
       '@types/node':
         specifier: ^22.10.10
         version: 22.10.10
+      '@types/pg':
+        specifier: ^8.11.11
+        version: 8.11.11
+      drizzle-orm:
+        specifier: ^0.39.0
+        version: 0.39.0(@types/pg@8.11.11)(@types/react@19.0.8)(pg@8.13.1)(react@19.0.0)
       elysia:
         specifier: ^1.2.10
         version: 1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3)
@@ -411,6 +429,11 @@ packages:
 
   '@drizzle-team/brocli@0.10.2':
     resolution: {integrity: sha512-z33Il7l5dKjUgGULTqBsQBQwckHh5AbIuxhdsIxDDiZAzBOrZO6q9ogcWC65kU382AfynTfgNumVcNIjuIua6w==}
+
+  '@elysiajs/eden@1.2.0':
+    resolution: {integrity: sha512-MpV45ahuF+iFZUg4tyJbLr9qxzY99m8clJVgQrDrz7Qh6eOKQ8MY6vjYMj3Wh21pTIRHPHzOLhVorRGby1/Owg==}
+    peerDependencies:
+      elysia: '>= 1.2.0'
 
   '@elysiajs/node@1.2.3':
     resolution: {integrity: sha512-LZoZRWV4CIiC1EsHr6bLSUGxA7iPyW49XEcY4SwMCYIW5yvVttQHH0iqe/hXuaa7UQK00V9hTwAPhXIYoZJkzQ==}
@@ -3494,6 +3517,10 @@ snapshots:
     optional: true
 
   '@drizzle-team/brocli@0.10.2': {}
+
+  '@elysiajs/eden@1.2.0(elysia@1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3))':
+    dependencies:
+      elysia: 1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3)
 
   '@elysiajs/node@1.2.3(elysia@1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3))(formidable@3.5.2)(ws@8.18.0)':
     dependencies:

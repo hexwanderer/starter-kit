@@ -28,8 +28,9 @@
       "@/*": [
         "./src/*"
       ],
-      "@starter-kit/database/*": ["../database/src/*"]
+      "@starter-kit/database/*": ["../database/src/*"],
+      "@starter-kit/server/*": ["../server/src/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src/**/*"]
 }

@@ -1,22 +1,25 @@
 {
-  "name": "server",
+  "name": "@starter-kit/server",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc -b",
     "start": "NODE_ENV=production node dist/index.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@elysiajs/node": "^1.2.3",
     "@starter-kit/database": "workspace:*",
     "@types/node": "^22.10.10",
+    "@types/pg": "^8.11.11",
+    "drizzle-orm": "^0.39.0",
     "elysia": "^1.2.10",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
+  },
+  "exports": {
+    ".": "./src/index.ts"
   }
 }

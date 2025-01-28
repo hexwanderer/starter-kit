@@ -3,15 +3,18 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" },
-    { "path": "../database" }
+    { "path": "../database" },
+    { "path": "../server" }
   ],
   "compilerOptions": {
+    "target": "ESNext",
     "module": "NodeNext",
     "moduleResolution": "nodenext",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@starter-kit/database/*": ["../database/src/*"]
+      "@starter-kit/database/*": ["../database/src/*"],
+      "@starter-kit/server/*": ["../server/src/*"]
     }
   },
 }

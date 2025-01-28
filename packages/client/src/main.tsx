@@ -8,6 +8,9 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 import { SidebarProvider } from "./components/ui/sidebar";
+import { treaty } from "@elysiajs/eden";
+import type { App } from "@starter-kit/server/index";
+import { ServerStateProvider } from "./hooks/useApp";
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -19,6 +22,8 @@ declare module "@tanstack/react-router" {
   }
 }
 
+const client = treaty<App>("localhost:3000");
+
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("No root element found");
 
@@ -28,7 +33,9 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <ThemeProvider>
         <SidebarProvider>
-          <RouterProvider router={router} />
+          <ServerStateProvider app={client}>
+            <RouterProvider router={router} />
+          </ServerStateProvider>
         </SidebarProvider>
       </ThemeProvider>
     </StrictMode>,
