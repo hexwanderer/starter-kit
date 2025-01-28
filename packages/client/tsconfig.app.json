@@ -27,7 +27,8 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ]
+      ],
+      "@starter-kit/database/*": ["../database/src/*"]
     }
   },
   "include": ["src"]
