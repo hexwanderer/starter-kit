@@ -71,3 +71,11 @@ The repository follows a modular architecture:
 - [X] Add CORS to server.
 - [ ] Verify server-client communication, particularly over Docker.
 - [ ] Add auth with Better Auth.
+
+---
+
+## Adding new packages
+
+When creating a new package,
+
+- [ ] Items in the new package are under src/

@@ -3,11 +3,15 @@ import { node } from "@elysiajs/node";
 import { db } from "@starter-kit/database";
 import { config } from "dotenv";
 import { cors } from "@elysiajs/cors";
+import { auth } from "@starter-kit/auth";
 
 config({ path: "../../.env" });
 
 export const app = new Elysia({ adapter: node() })
-  .state("db", db)
+  .state({
+    db,
+    auth,
+  })
   .use(cors())
   .get("/", () => "Hello Elysia")
   .listen(

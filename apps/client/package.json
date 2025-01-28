@@ -43,6 +43,7 @@
     "@starter-kit/server": "workspace:*",
     "@tanstack/react-query": "^5.65.0",
     "@tanstack/react-router": "^1.97.23",
+    "better-auth": "^1.1.14",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",

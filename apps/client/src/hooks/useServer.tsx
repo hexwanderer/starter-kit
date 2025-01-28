@@ -1,9 +1,12 @@
 import type { treaty } from "@elysiajs/eden";
 import type { App } from "@starter-kit/server/index";
-import { createContext, forwardRef, useContext } from "react";
+import type { ReactNode } from "@tanstack/react-router";
+import { createContext, useContext } from "react";
+
+type ServerClient = ReturnType<typeof treaty<App>>;
 
 type ServerState = {
-  app: ReturnType<typeof treaty<App>>;
+  app: ServerClient;
 };
 
 const ServerContext = createContext<ServerState | null>(null);
@@ -17,17 +20,16 @@ export function useServer() {
   return context;
 }
 
-export const ServerStateProvider = forwardRef<
-  HTMLDivElement,
-  React.ComponentProps<"div"> & {
-    app: ReturnType<typeof treaty<App>>;
-  }
->(({ app, ...props }, ref) => {
+interface ServerStateProviderProps {
+  app: ServerClient;
+  children: ReactNode;
+}
+
+export function ServerStateProvider({
+  app,
+  children,
+}: ServerStateProviderProps) {
   return (
-    <ServerContext.Provider value={{ app }}>
-      <div ref={ref} {...props}>
-        {props.children}
-      </div>
-    </ServerContext.Provider>
+    <ServerContext.Provider value={{ app }}>{children}</ServerContext.Provider>
   );
-});
+}

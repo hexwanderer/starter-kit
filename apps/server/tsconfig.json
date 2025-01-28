@@ -18,9 +18,10 @@
       "@starter-kit/server/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*"],                     // Include all .ts files in the src directory
+  "include": ["src/**/*.ts"],                     // Include all .ts files in the src directory
   "exclude": ["node_modules"],
   "references": [
-    { "path": "../../packages/database" }
+    { "path": "../../packages/database" },
+    { "path": "../../packages/auth" }
   ]
 }

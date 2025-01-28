@@ -12,18 +12,20 @@
   "dependencies": {
     "@elysiajs/cors": "^1.2.0",
     "@elysiajs/node": "^1.2.3",
+    "@starter-kit/auth": "workspace:*",
     "@starter-kit/database": "workspace:*",
     "@types/node": "^22.10.10",
     "@types/pg": "^8.11.11",
+    "better-auth": "^1.1.14",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.39.0",
     "elysia": "^1.2.10",
     "typescript": "^5.7.3"
   },
-  "exports": {
-    ".": "./src/index.ts"
-  },
   "devDependencies": {
     "tsx": "^4.19.2"
+  },
+  "exports": {
+    ".": "./src/index.ts"
   }
 }

@@ -5,6 +5,7 @@
   // Each item in "references" points to the sub-project's tsconfig
   "references": [
     { "path": "./packages/database" },
+    { "path": "./packages/auth" },
     { "path": "./apps/client" },
     { "path": "./apps/server" }
   ],
@@ -18,7 +19,9 @@
     "strict": true,
     "paths": {
       "@starter-kit/database": ["./packages/database"],
-      "@starter-kit/server": ["./apps/server"]
+      "@starter-kit/server": ["./apps/server"],
+      "@starter-kit/client": ["./apps/client"],
+      "@starter-kit/auth": ["./packages/auth"]
     }
   }
 }
