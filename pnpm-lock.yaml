@@ -125,6 +125,9 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.4.7
       embla-carousel-react:
         specifier: ^8.5.2
         version: 8.5.2(react@19.0.0)
@@ -274,18 +277,22 @@ importers:
       '@types/pg':
         specifier: ^8.11.11
         version: 8.11.11
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.4.7
       drizzle-orm:
         specifier: ^0.39.0
         version: 0.39.0(@types/pg@8.11.11)(@types/react@19.0.8)(pg@8.13.1)(react@19.0.0)
       elysia:
         specifier: ^1.2.10
         version: 1.2.10(@sinclair/typebox@0.34.14)(typescript@5.7.3)
-      tsx:
-        specifier: ^4.19.2
-        version: 4.19.2
       typescript:
         specifier: ^5.7.3
         version: 5.7.3
+    devDependencies:
+      tsx:
+        specifier: ^4.19.2
+        version: 4.19.2
 
 packages:
 

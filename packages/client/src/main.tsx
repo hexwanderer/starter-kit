@@ -23,7 +23,7 @@ declare module "@tanstack/react-router" {
   }
 }
 
-const client = treaty<App>("localhost:3000");
+const client = treaty<App>("/api");
 const queryClient = new QueryClient();
 
 const rootElement = document.getElementById("root");
