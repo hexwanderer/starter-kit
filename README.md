@@ -65,65 +65,9 @@ The repository follows a modular architecture:
 
 ---
 
-## Key Features
+## TODOs
 
-- **Component-Driven Frontend**: Leverages reusable UI components in the `client/src/components` directory.
-- **Backend-Ready API**: Server built on Node.js and TypeScript, providing a seamless API layer.
-- **Database Integration**: Fully configured schema and handlers, supporting modern ORM-based operations.
-- **Package-Based Organization**: Modular packages for client, server, and database, ensuring clean separation of concerns.
-
----
-
-## Adding New Packages
-
-This repository uses a monorepo structure managed with `pnpm` workspaces. To add a new package:
-
-1. Navigate to the root directory.
-2. Run the following command to create a new package:
-
-   ```bash
-   pnpm init -w @scope/package-name
-   ```
-
-3. Add the package to the workspace by updating `pnpm-workspace.yaml`.
-
-4. Install dependencies for the new package using:
-
-   ```bash
-   pnpm add <dependency-name> --filter <package-name>
-   ```
-
----
-
-## Development Scripts
-
-### Client
-- Start the client:
-  ```bash
-  pnpm --filter client dev
-  ```
-
-### Server
-- Start the server:
-  ```bash
-  pnpm --filter server dev
-  ```
-
-### Database
-- Run database migrations:
-  ```bash
-  pnpm --filter database migrate
-  ```
-
----
-
-## Contributing
-
-Contributions are welcome! Please fork the repository, make your changes, and submit a pull request. Be sure to follow the coding style and conventions outlined in the repository.
-
----
-
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
+[ ] Properly document process for adding new packages.
+[ ] Add CORS to server.
+[ ] Verify server-client communication, particularly over Docker.
+[ ] Add auth with Better Auth.
