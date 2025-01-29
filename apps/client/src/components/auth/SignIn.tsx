@@ -11,15 +11,15 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { useMutation } from "@tanstack/react-query";
-import { useAuth } from "@/hooks/useAuth";
 import { Button } from "../ui/button";
+import { auth } from "@/queries/mutations";
 
 const signInFormSchema = z.object({
   email: z.string().email(),
   password: z.string(),
 });
 
-type SignInFormSchema = z.infer<typeof signInFormSchema>;
+export type SignInFormSchema = z.infer<typeof signInFormSchema>;
 
 export function SignIn() {
   const form = useForm<SignInFormSchema>({
@@ -30,24 +30,9 @@ export function SignIn() {
     resolver: zodResolver(signInFormSchema),
   });
 
-  const { authClient } = useAuth();
-
   const signInMutation = useMutation({
     mutationKey: ["auth", "signIn"],
-    mutationFn: async (data: SignInFormSchema) => {
-      await authClient.signIn.email(
-        {
-          email: data.email,
-          password: data.password,
-        },
-        {
-          onSuccess: () => {},
-          onError: (error) => {
-            console.log("error", error);
-          },
-        },
-      );
-    },
+    mutationFn: auth().signIn,
   });
 
   function handleSubmit(data: SignInFormSchema) {

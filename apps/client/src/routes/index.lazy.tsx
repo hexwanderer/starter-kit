@@ -1,4 +1,3 @@
-import { OrganizationSelectScreen } from "@/components/auth/OrganizationSelectScreen";
 import { SignIn } from "@/components/auth/SignIn";
 import { createLazyFileRoute } from "@tanstack/react-router";
 
