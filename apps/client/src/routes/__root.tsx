@@ -1,5 +1,6 @@
 import { AppSidebar } from "@/components/Sidebar";
 import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/sonner";
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
@@ -36,6 +37,9 @@ function Root() {
         <div className="flex-1 overflow-y-auto">
           <Outlet />
         </div>
+
+        {/* Toast Container */}
+        <Toaster />
       </div>
 
       {/* TanStack Router DevTools */}

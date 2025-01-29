@@ -10,6 +10,7 @@ import { treaty } from "@elysiajs/eden";
 import type { App } from "@starter-kit/server/index";
 import { ServerStateProvider } from "@/hooks/useServer";
 import { AuthProvider } from "@/hooks/useAuth";
+import { organization } from "better-auth/plugins";
 import { buildProvidersTree } from "@/lib/providersTree";
 
 // Import the generated route tree
@@ -28,7 +29,9 @@ declare module "@tanstack/react-router" {
 
 const serverClient = treaty<App>("/api");
 const queryClient = new QueryClient();
-const authClient = createAuthClient();
+const authClient = createAuthClient({
+  plugins: [organization()],
+});
 
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("No root element found");

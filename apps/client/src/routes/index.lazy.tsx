@@ -1,3 +1,5 @@
+import { OrganizationSelectScreen } from "@/components/auth/OrganizationSelectScreen";
+import { SignIn } from "@/components/auth/SignIn";
 import { createLazyFileRoute } from "@tanstack/react-router";
 
 export const Route = createLazyFileRoute("/")({
@@ -11,6 +13,7 @@ function Index() {
         Welcome Home! Lorem ipsum dolor sit amet consectetur adipisicing elit.
         Quisquam, quia.
       </h3>
+      <SignIn />
     </div>
   );
 }

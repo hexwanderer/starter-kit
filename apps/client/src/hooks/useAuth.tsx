@@ -1,7 +1,7 @@
 import { createContext, useContext, type ReactNode } from "react";
 import type { createAuthClient } from "better-auth/client";
 
-type AuthClient = ReturnType<typeof createAuthClient>;
+export type AuthClient = ReturnType<typeof createAuthClient>;
 
 type AuthContextType = {
   authClient: AuthClient;
