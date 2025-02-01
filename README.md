@@ -1,33 +1,22 @@
-# `Turborepo` Vite starter
+# Hexwanderer Starter Kit
 
-This is a community-maintained example. If you experience a problem, please submit a pull request with a fix. GitHub Issues will be closed.
+This is a starter kit for building a full stack web application with TypeScript, React, and Node.js.
 
-## Using this example
+## Tech Stack
 
-Run the following command:
+- React frontend built with Vite and Tanstack Router
+    - Tanstack Query for data fetching
+- Elysia.js backend
+    - Drizzle ORM for database access
+- PostgreSQL database
+- Better-Auth authentication
+- Tailwind CSS for styling
+- Biome.js for formatting and linting
 
-```sh
-npx create-turbo@latest -e with-vite
-```
+## Turbo
 
-## What's inside?
+Turborepo is used to manage the monorepo. It is a CLI tool that helps you manage multiple packages in a single repository.
 
-This Turborepo includes the following packages and apps:
+However, I haven't figured out how to use `turbo run`, as Elysia both exports and runs, which confuses Turbo a little since it thinks it's only a dependency on client.
 
-### Apps and Packages
-
-- `docs`: a vanilla [vite](https://vitejs.dev) ts app
-- `web`: another vanilla [vite](https://vitejs.dev) ts app
-- `@repo/ui`: a stub component & utility library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: shared `eslint` configurations
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package and app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+In the meantime, `turbo build` works, and `docker-compose up --build` will build and run the entire stack for production deployments.
