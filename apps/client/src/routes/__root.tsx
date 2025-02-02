@@ -1,7 +1,7 @@
-import { AppSidebar } from "@/components/Sidebar";
+import { AppSidebar } from "@/components/sidebar";
 import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
-import type { AuthContextType } from "@/hooks/useAuth";
+import type { AuthContextType } from "@/hooks/use-auth";
 import {
   Link,
   Outlet,
@@ -16,7 +16,7 @@ export const Route = createRootRouteWithContext<AuthContextType>()({
 function Root() {
   const { isMobile } = useSidebar();
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen w-full">
       {/* Sidebar */}
       <AppSidebar className="hidden lg:block w-64 bg-gray-800 text-white" />
 

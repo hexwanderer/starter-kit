@@ -1,9 +1,9 @@
-import { auth } from "@/queries/mutations";
+import { authMutations } from "@/queries/mutations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -11,12 +11,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
-import { Input } from "../ui/input";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 const signInFormSchema = z.object({
-  email: z.string().email(),
-  password: z.string(),
+  email: z.string().email().min(1, "Email is required"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
 export type SignInFormSchema = z.infer<typeof signInFormSchema>;
@@ -32,7 +32,7 @@ export function SignIn() {
 
   const signInMutation = useMutation({
     mutationKey: ["auth", "signIn"],
-    mutationFn: auth().signIn,
+    mutationFn: authMutations().signIn,
   });
 
   function handleSubmit(data: SignInFormSchema) {

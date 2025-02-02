@@ -1,4 +1,4 @@
-import { SignIn } from "@/components/auth/SignIn";
+import { SignIn } from "@/components/auth/sign-in";
 import { createLazyFileRoute } from "@tanstack/react-router";
 
 export const Route = createLazyFileRoute("/")({

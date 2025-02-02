@@ -1,4 +1,4 @@
-import { useServer } from "@/hooks/useServer";
+import { useServer } from "@/hooks/use-server";
 import type { treaty } from "@elysiajs/eden";
 import type { Organization } from "@repo/database";
 import type { App } from "@repo/server";
