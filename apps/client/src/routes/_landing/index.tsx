@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_authenticated/dashboard")({
+export const Route = createFileRoute("/_landing/")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  return <div>Hello "/authenticated/dashboard"!</div>;
+  return <div>Welcome to the Landing Page!</div>;
 }
