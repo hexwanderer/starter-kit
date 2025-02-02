@@ -3,22 +3,27 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import "./theme.css";
 import { ThemeProvider } from "@/components/ThemeProvider.tsx";
-import { RouterProvider, createRouter } from "@tanstack/react-router";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { AuthProvider, useAuth } from "@/hooks/useAuth";
+import { ServerStateProvider } from "@/hooks/useServer";
+import { buildProvidersTree } from "@/lib/providersTree";
 import { treaty } from "@elysiajs/eden";
 import type { App } from "@repo/server";
-import { ServerStateProvider } from "@/hooks/useServer";
-import { AuthProvider } from "@/hooks/useAuth";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { organization } from "better-auth/plugins";
-import { buildProvidersTree } from "@/lib/providersTree";
-
+import { createAuthClient } from "better-auth/client";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
-import { createAuthClient } from "better-auth/client";
 
 // Create a new router instance
-const router = createRouter({ routeTree });
+const router = createRouter({
+  routeTree,
+  context: {
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
+    auth: undefined!,
+  },
+});
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {
@@ -30,6 +35,10 @@ declare module "@tanstack/react-router" {
 const serverClient = treaty<App>("/api");
 const queryClient = new QueryClient();
 const authClient = createAuthClient({
+  baseURL: "",
+  fetchOptions: {
+    timeout: 10,
+  },
   plugins: [organization()],
 });
 
@@ -44,12 +53,16 @@ const ProviderTree = buildProvidersTree([
   [ThemeProvider, {}],
 ]);
 
+function InnerApp() {
+  return <RouterProvider router={router} context={{ authClient }} />;
+}
+
 if (!rootElement.innerHTML) {
   const root = createRoot(rootElement);
   root.render(
     <StrictMode>
       <ProviderTree>
-        <RouterProvider router={router} />
+        <InnerApp />
       </ProviderTree>
     </StrictMode>,
   );

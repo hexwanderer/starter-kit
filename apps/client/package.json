@@ -4,8 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "generate-routes": "tsr generate",
+    "watch-routes": "tsr watch",
+    "dev": "tsr generate && vite",
+    "build": "tsr generate &&tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -69,6 +71,7 @@
     "@biomejs/biome": "1.9.4",
     "@eslint/js": "^9.17.0",
     "@tailwindcss/postcss": "^4.0.0",
+    "@tanstack/router-cli": "^1.99.0",
     "@tanstack/router-devtools": "^1.97.23",
     "@tanstack/router-plugin": "^1.97.23",
     "@types/node": "^22.10.10",

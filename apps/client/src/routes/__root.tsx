@@ -1,10 +1,15 @@
 import { AppSidebar } from "@/components/Sidebar";
 import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import type { AuthContextType } from "@/hooks/useAuth";
+import {
+  Link,
+  Outlet,
+  createRootRouteWithContext,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<AuthContextType>()({
   component: Root,
 });
 

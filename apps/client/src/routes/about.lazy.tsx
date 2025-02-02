@@ -3,10 +3,10 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 
 export const Route = createLazyFileRoute("/about")({
-	component: About,
+  component: About,
 });
 
 function About() {
-	// const usersData = useInfiniteQuery(users().getAll());
-	return <div className="p-2">Hello from About!</div>;
+  // const usersData = useInfiniteQuery(users().getAll());
+  return <div className="p-2">Hello from About!</div>;
 }

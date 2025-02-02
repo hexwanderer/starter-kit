@@ -1,4 +1,4 @@
-import type { ReactNode, ComponentType } from "react";
+import type { ComponentType, ReactNode } from "react";
 
 type ProviderComponent<Props> = ComponentType<Props> & {
   // Optional properties for compatibility with React context providers

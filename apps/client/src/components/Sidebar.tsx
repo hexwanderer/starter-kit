@@ -1,3 +1,9 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,44 +18,38 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarHeader,
-  SidebarRail,
   SidebarGroup,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  SidebarRail,
   useSidebar,
 } from "@/components/ui/sidebar";
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import {
-  ChevronRight,
-  Plus,
-  type LucideIcon,
+  AudioWaveform,
   BadgeCheck,
   Bell,
-  ChevronsUpDown,
-  CreditCard,
-  LogOut,
-  Sparkles,
-  AudioWaveform,
   BookOpen,
   Bot,
-  Command,
-  GalleryVerticalEnd,
-  Settings2,
-  SquareTerminal,
-  ChevronsRight,
+  ChevronRight,
   ChevronsLeft,
+  ChevronsRight,
+  ChevronsUpDown,
+  Command,
+  CreditCard,
+  GalleryVerticalEnd,
+  LogOut,
+  type LucideIcon,
+  Plus,
+  Settings2,
+  Sparkles,
+  SquareTerminal,
 } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
 
 const data = {

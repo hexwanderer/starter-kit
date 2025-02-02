@@ -2,7 +2,7 @@
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
     "target": "ESNext",
@@ -10,7 +10,7 @@
     "moduleResolution": "nodenext",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
+      "@/*": ["./src/*"]
     }
-  },
+  }
 }
