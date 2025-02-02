@@ -1,11 +1,11 @@
 import type { InferSelectModel } from "drizzle-orm";
-import type { organization, session, user } from "./auth";
+import type { organizations, sessions, users } from "./auth";
 
-export type Organization = InferSelectModel<typeof organization>;
-export type OrganizationInsert = InferSelectModel<typeof organization>;
+export type s = InferSelectModel<typeof organizations>;
+export type OrganizationInsert = InferSelectModel<typeof organizations>;
 
-export type User = InferSelectModel<typeof user>;
-export type UserInsert = InferSelectModel<typeof user>;
+export type User = InferSelectModel<typeof users>;
+export type UserInsert = InferSelectModel<typeof users>;
 
-export type Session = InferSelectModel<typeof session>;
-export type SessionInsert = InferSelectModel<typeof session>;
+export type Session = InferSelectModel<typeof sessions>;
+export type SessionInsert = InferSelectModel<typeof sessions>;

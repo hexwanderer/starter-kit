@@ -4,7 +4,7 @@ import "./index.css";
 import "./theme.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { AuthProvider, useAuth } from "@/hooks/use-auth";
+import { AuthProvider } from "@/hooks/use-auth";
 import { ServerStateProvider } from "@/hooks/use-server";
 import { buildProvidersTree } from "@/lib/providersTree";
 import { treaty } from "@elysiajs/eden";
@@ -36,9 +36,6 @@ const serverClient = treaty<App>("/api");
 const queryClient = new QueryClient();
 const authClient = createAuthClient({
   baseURL: "",
-  fetchOptions: {
-    timeout: 10,
-  },
   plugins: [organization()],
 });
 

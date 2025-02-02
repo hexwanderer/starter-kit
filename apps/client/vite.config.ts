@@ -10,11 +10,10 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [TanStackRouterVite(), react()],
     server: {
-      host: "0.0.0.0",
       port: 3001,
       proxy: {
         "/api": {
-          target: env.VITE_SERVER_URL,
+          target: "http://127.0.0.1:7505",
           changeOrigin: true,
           secure: false,
         },

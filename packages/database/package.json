@@ -2,7 +2,9 @@
   "name": "@repo/database",
   "type": "module",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "drizzle:push": "drizzle-kit push",
+    "drizzle:generate": "drizzle-kit generate"
   },
   "exports": {
     ".": {

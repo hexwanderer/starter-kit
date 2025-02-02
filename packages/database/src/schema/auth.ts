@@ -1,6 +1,12 @@
-import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  text,
+  integer,
+  timestamp,
+  boolean,
+} from "drizzle-orm/pg-core";
 
-export const user = pgTable("user", {
+export const users = pgTable("users", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
@@ -10,7 +16,7 @@ export const user = pgTable("user", {
   updatedAt: timestamp("updated_at").notNull(),
 });
 
-export const session = pgTable("session", {
+export const sessions = pgTable("sessions", {
   id: text("id").primaryKey(),
   expiresAt: timestamp("expires_at").notNull(),
   token: text("token").notNull().unique(),
@@ -20,17 +26,17 @@ export const session = pgTable("session", {
   userAgent: text("user_agent"),
   userId: text("user_id")
     .notNull()
-    .references(() => user.id),
+    .references(() => users.id),
   activeOrganizationId: text("active_organization_id"),
 });
 
-export const account = pgTable("account", {
+export const accounts = pgTable("accounts", {
   id: text("id").primaryKey(),
   accountId: text("account_id").notNull(),
   providerId: text("provider_id").notNull(),
   userId: text("user_id")
     .notNull()
-    .references(() => user.id),
+    .references(() => users.id),
   accessToken: text("access_token"),
   refreshToken: text("refresh_token"),
   idToken: text("id_token"),
@@ -42,7 +48,7 @@ export const account = pgTable("account", {
   updatedAt: timestamp("updated_at").notNull(),
 });
 
-export const verification = pgTable("verification", {
+export const verifications = pgTable("verifications", {
   id: text("id").primaryKey(),
   identifier: text("identifier").notNull(),
   value: text("value").notNull(),
@@ -51,7 +57,7 @@ export const verification = pgTable("verification", {
   updatedAt: timestamp("updated_at"),
 });
 
-export const organization = pgTable("organization", {
+export const organizations = pgTable("organizations", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   slug: text("slug").unique(),
@@ -60,28 +66,28 @@ export const organization = pgTable("organization", {
   metadata: text("metadata"),
 });
 
-export const member = pgTable("member", {
+export const members = pgTable("members", {
   id: text("id").primaryKey(),
   organizationId: text("organization_id")
     .notNull()
-    .references(() => organization.id),
+    .references(() => organizations.id),
   userId: text("user_id")
     .notNull()
-    .references(() => user.id),
+    .references(() => users.id),
   role: text("role").notNull(),
   createdAt: timestamp("created_at").notNull(),
 });
 
-export const invitation = pgTable("invitation", {
+export const invitations = pgTable("invitations", {
   id: text("id").primaryKey(),
   organizationId: text("organization_id")
     .notNull()
-    .references(() => organization.id),
+    .references(() => organizations.id),
   email: text("email").notNull(),
   role: text("role"),
   status: text("status").notNull(),
   expiresAt: timestamp("expires_at").notNull(),
   inviterId: text("inviter_id")
     .notNull()
-    .references(() => user.id),
+    .references(() => users.id),
 });

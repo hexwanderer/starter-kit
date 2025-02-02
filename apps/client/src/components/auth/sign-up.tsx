@@ -102,7 +102,7 @@ export function SignUp() {
         <Button
           type="submit"
           className="w-full m-2"
-          disabled={signUpMutation.isPending || form.formState.errors !== null}
+          disabled={signUpMutation.isPending || !form.formState.isValid}
         >
           Sign Up
         </Button>

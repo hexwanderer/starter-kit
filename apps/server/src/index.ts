@@ -7,9 +7,13 @@ import { type Context, Elysia } from "elysia";
 
 config({ path: "../../.env" });
 
-function betterAuthMiddleware(context: Context) {
-  return auth.handler(context.request);
+console.log(`DATABASE_URL: ${process.env.DATABASE_URL}`);
+
+async function betterAuthMiddleware(context: Context) {
+  return await auth.handler(context.request);
 }
+
+console.log(`drizzle.client is ${JSON.stringify(db.$client)}`);
 
 export const app = new Elysia({ adapter: node() })
   .state({
@@ -22,7 +26,7 @@ export const app = new Elysia({ adapter: node() })
   .listen(
     {
       port: process.env.SERVER_PORT,
-      hostname: "0.0.0.0",
+      hostname: "127.0.0.1",
     },
     ({ hostname, port }) => {
       console.log(`🦊 Elysia is running at ${hostname}:${port}`);

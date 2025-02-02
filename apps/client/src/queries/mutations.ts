@@ -17,11 +17,13 @@ export const authMutations = () => {
       return data;
     },
     signUp: async (params: SignUpFormSchema) => {
+      console.log("params", params);
       const { data, error } = await authClient.signUp.email({
         email: params.email,
         password: params.password,
         name: params.name,
       });
+      console.log(error);
 
       if (error) throw error;
 
