@@ -13,7 +13,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Link } from "@tanstack/react-router";
 
 const signInFormSchema = z.object({
   email: z.string().email().min(1, "Email is required"),
@@ -42,62 +41,53 @@ export function SignIn() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <div>
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem className="p-2 flex flex-col gap-2">
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="Email" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          {form.formState.errors.email && (
-            <FormMessage className="mt-1 text-sm text-error">
-              {form.formState.errors.email.message}
-            </FormMessage>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="you@example.com" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
           )}
-        </div>
+        />
 
-        <div>
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem className="p-2 flex flex-col gap-2">
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <div className="flex justify-between items-center">
                 <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input type="password" placeholder="Password" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          {form.formState.errors.password && (
-            <FormMessage className="mt-1 text-sm text-error">
-              {form.formState.errors.password.message}
-            </FormMessage>
+                <Button
+                  variant="link"
+                  className="px-0 h-auto font-normal"
+                  onClick={() => {
+                    /* Handle forgot password */
+                  }}
+                >
+                  Forgot Password?
+                </Button>
+              </div>
+              <FormControl>
+                <Input type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
           )}
-        </div>
+        />
 
         <Button
           type="submit"
-          className="w-full m-2"
-          disabled={signInMutation.isPending || form.formState.errors !== null}
+          className="w-full"
+          disabled={signInMutation.isPending}
         >
           Sign In
         </Button>
-
-        <Link to="/auth/sign-up">
-          <Button>Sign Up</Button>
-        </Link>
-
-        <Link to="/">
-          <Button>Cancel</Button>
-        </Link>
       </form>
     </Form>
   );

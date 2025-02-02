@@ -18,13 +18,12 @@ function RouteComponent() {
           </Link>
         </div>
         <div>
-          <Link to="/auth/sign-in">
+          <Link to="/auth">
             <Button className="m-2">Sign In</Button>
           </Link>
         </div>
       </div>
       <hr />
-
       <Outlet />
     </div>
   );
