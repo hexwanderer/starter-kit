@@ -1,6 +1,6 @@
 import { cors } from "@elysiajs/cors";
 import { node } from "@elysiajs/node";
-import { auth } from "@repo/auth";
+import { auth } from "./auth";
 import { db } from "@repo/database";
 import { config } from "dotenv";
 import { type Context, Elysia } from "elysia";

@@ -13,6 +13,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { organization } from "better-auth/plugins";
 import { createAuthClient } from "better-auth/client";
+import { ac, admin, member, owner } from "@repo/auth";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 
@@ -36,7 +37,16 @@ const serverClient = treaty<App>("/api");
 const queryClient = new QueryClient();
 const authClient = createAuthClient({
   baseURL: "",
-  plugins: [organization()],
+  plugins: [
+    organization({
+      ac: ac,
+      roles: {
+        owner,
+        admin,
+        member,
+      },
+    }),
+  ],
 });
 
 const rootElement = document.getElementById("root");

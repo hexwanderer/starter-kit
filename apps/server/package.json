@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc -b",
-    "start": "NODE_ENV=production node dist/index.ts"
+    "start": "NODE_ENV=production node dist/index.ts",
+    "generate": "pnpx @better-auth/cli generate --output ../../database/src/schema/auth.ts"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.2.0",
@@ -23,6 +24,7 @@
     "typescript": "^5.7.3"
   },
   "devDependencies": {
+    "@better-auth/cli": "^1.1.14",
     "tsx": "^4.19.2"
   },
   "exports": {
