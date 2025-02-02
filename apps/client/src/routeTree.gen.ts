@@ -11,22 +11,17 @@
 // Import Routes
 
 import { Route as rootRoute } from "./routes/__root"
-import { Route as AuthImport } from "./routes/auth"
 import { Route as LandingImport } from "./routes/_landing"
 import { Route as AuthenticatedImport } from "./routes/_authenticated"
+import { Route as AuthIndexImport } from "./routes/auth/index"
 import { Route as LandingIndexImport } from "./routes/_landing/index"
+import { Route as AuthOrgsImport } from "./routes/auth/orgs"
 import { Route as LandingFeaturesImport } from "./routes/_landing/features"
 import { Route as LandingAboutImport } from "./routes/_landing/about"
 import { Route as AuthenticatedDashboardImport } from "./routes/_authenticated/dashboard"
 import { Route as AuthenticatedSettingsIndexImport } from "./routes/_authenticated/settings/index"
 
 // Create/Update Routes
-
-const AuthRoute = AuthImport.update({
-  id: "/auth",
-  path: "/auth",
-  getParentRoute: () => rootRoute,
-} as any)
 
 const LandingRoute = LandingImport.update({
   id: "/_landing",
@@ -38,10 +33,22 @@ const AuthenticatedRoute = AuthenticatedImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const AuthIndexRoute = AuthIndexImport.update({
+  id: "/auth/",
+  path: "/auth/",
+  getParentRoute: () => rootRoute,
+} as any)
+
 const LandingIndexRoute = LandingIndexImport.update({
   id: "/",
   path: "/",
   getParentRoute: () => LandingRoute,
+} as any)
+
+const AuthOrgsRoute = AuthOrgsImport.update({
+  id: "/auth/orgs",
+  path: "/auth/orgs",
+  getParentRoute: () => rootRoute,
 } as any)
 
 const LandingFeaturesRoute = LandingFeaturesImport.update({
@@ -88,13 +95,6 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof LandingImport
       parentRoute: typeof rootRoute
     }
-    "/auth": {
-      id: "/auth"
-      path: "/auth"
-      fullPath: "/auth"
-      preLoaderRoute: typeof AuthImport
-      parentRoute: typeof rootRoute
-    }
     "/_authenticated/dashboard": {
       id: "/_authenticated/dashboard"
       path: "/dashboard"
@@ -116,12 +116,26 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof LandingFeaturesImport
       parentRoute: typeof LandingImport
     }
+    "/auth/orgs": {
+      id: "/auth/orgs"
+      path: "/auth/orgs"
+      fullPath: "/auth/orgs"
+      preLoaderRoute: typeof AuthOrgsImport
+      parentRoute: typeof rootRoute
+    }
     "/_landing/": {
       id: "/_landing/"
       path: "/"
       fullPath: "/"
       preLoaderRoute: typeof LandingIndexImport
       parentRoute: typeof LandingImport
+    }
+    "/auth/": {
+      id: "/auth/"
+      path: "/auth"
+      fullPath: "/auth"
+      preLoaderRoute: typeof AuthIndexImport
+      parentRoute: typeof rootRoute
     }
     "/_authenticated/settings/": {
       id: "/_authenticated/settings/"
@@ -166,21 +180,23 @@ const LandingRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   "": typeof LandingRouteWithChildren
-  "/auth": typeof AuthRoute
   "/dashboard": typeof AuthenticatedDashboardRoute
   "/about": typeof LandingAboutRoute
   "/features": typeof LandingFeaturesRoute
+  "/auth/orgs": typeof AuthOrgsRoute
   "/": typeof LandingIndexRoute
+  "/auth": typeof AuthIndexRoute
   "/settings": typeof AuthenticatedSettingsIndexRoute
 }
 
 export interface FileRoutesByTo {
   "": typeof AuthenticatedRouteWithChildren
-  "/auth": typeof AuthRoute
   "/dashboard": typeof AuthenticatedDashboardRoute
   "/about": typeof LandingAboutRoute
   "/features": typeof LandingFeaturesRoute
+  "/auth/orgs": typeof AuthOrgsRoute
   "/": typeof LandingIndexRoute
+  "/auth": typeof AuthIndexRoute
   "/settings": typeof AuthenticatedSettingsIndexRoute
 }
 
@@ -188,11 +204,12 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   "/_authenticated": typeof AuthenticatedRouteWithChildren
   "/_landing": typeof LandingRouteWithChildren
-  "/auth": typeof AuthRoute
   "/_authenticated/dashboard": typeof AuthenticatedDashboardRoute
   "/_landing/about": typeof LandingAboutRoute
   "/_landing/features": typeof LandingFeaturesRoute
+  "/auth/orgs": typeof AuthOrgsRoute
   "/_landing/": typeof LandingIndexRoute
+  "/auth/": typeof AuthIndexRoute
   "/_authenticated/settings/": typeof AuthenticatedSettingsIndexRoute
 }
 
@@ -200,23 +217,33 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ""
-    | "/auth"
     | "/dashboard"
     | "/about"
     | "/features"
+    | "/auth/orgs"
     | "/"
+    | "/auth"
     | "/settings"
   fileRoutesByTo: FileRoutesByTo
-  to: "" | "/auth" | "/dashboard" | "/about" | "/features" | "/" | "/settings"
+  to:
+    | ""
+    | "/dashboard"
+    | "/about"
+    | "/features"
+    | "/auth/orgs"
+    | "/"
+    | "/auth"
+    | "/settings"
   id:
     | "__root__"
     | "/_authenticated"
     | "/_landing"
-    | "/auth"
     | "/_authenticated/dashboard"
     | "/_landing/about"
     | "/_landing/features"
+    | "/auth/orgs"
     | "/_landing/"
+    | "/auth/"
     | "/_authenticated/settings/"
   fileRoutesById: FileRoutesById
 }
@@ -224,13 +251,15 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   LandingRoute: typeof LandingRouteWithChildren
-  AuthRoute: typeof AuthRoute
+  AuthOrgsRoute: typeof AuthOrgsRoute
+  AuthIndexRoute: typeof AuthIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   LandingRoute: LandingRouteWithChildren,
-  AuthRoute: AuthRoute,
+  AuthOrgsRoute: AuthOrgsRoute,
+  AuthIndexRoute: AuthIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -245,7 +274,8 @@ export const routeTree = rootRoute
       "children": [
         "/_authenticated",
         "/_landing",
-        "/auth"
+        "/auth/orgs",
+        "/auth/"
       ]
     },
     "/_authenticated": {
@@ -263,9 +293,6 @@ export const routeTree = rootRoute
         "/_landing/"
       ]
     },
-    "/auth": {
-      "filePath": "auth.tsx"
-    },
     "/_authenticated/dashboard": {
       "filePath": "_authenticated/dashboard.tsx",
       "parent": "/_authenticated"
@@ -278,9 +305,15 @@ export const routeTree = rootRoute
       "filePath": "_landing/features.tsx",
       "parent": "/_landing"
     },
+    "/auth/orgs": {
+      "filePath": "auth/orgs.tsx"
+    },
     "/_landing/": {
       "filePath": "_landing/index.tsx",
       "parent": "/_landing"
+    },
+    "/auth/": {
+      "filePath": "auth/index.tsx"
     },
     "/_authenticated/settings/": {
       "filePath": "_authenticated/settings/index.tsx",

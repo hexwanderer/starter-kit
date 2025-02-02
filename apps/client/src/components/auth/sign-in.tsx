@@ -13,6 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useNavigate } from "@tanstack/react-router";
 
 const signInFormSchema = z.object({
   email: z.string().email().min(1, "Email is required"),
@@ -30,9 +31,14 @@ export function SignIn() {
     resolver: zodResolver(signInFormSchema),
   });
 
+  const navigate = useNavigate();
+
   const signInMutation = useMutation({
     mutationKey: ["auth", "signIn"],
     mutationFn: authMutations().signIn,
+    onSuccess: () => {
+      navigate({ to: "/auth/orgs" });
+    },
   });
 
   function handleSubmit(data: SignInFormSchema) {

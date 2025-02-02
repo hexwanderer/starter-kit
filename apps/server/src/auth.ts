@@ -11,6 +11,7 @@ export const auth = betterAuth({
     provider: "pg", // or "mysql", "sqlite"
     usePlural: true,
   }),
+  trustedOrigins: ["http://localhost:3001"],
   emailAndPassword: {
     enabled: true,
   },

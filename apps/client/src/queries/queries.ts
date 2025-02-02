@@ -1,3 +1,4 @@
+import { useAuth } from "@/hooks/use-auth";
 import { useServer } from "@/hooks/use-server";
 import type { treaty } from "@elysiajs/eden";
 import type { Organization } from "@repo/database";
@@ -26,37 +27,15 @@ export const users = () => {
 
 export const auth = () => {
   // const { serverClient } = useServer();
+  const { authClient } = useAuth();
   return {
     listAllOrganizations: () =>
-      infiniteQueryOptions<Organization[]>({
+      infiniteQueryOptions<any>({
         queryKey: ["auth", "listAllOrganizations"],
         queryFn: async () => {
-          return [
-            {
-              name: "Org 1",
-              id: "1",
-              slug: "org-1",
-              logo: "",
-              metadata: "",
-              createdAt: new Date(),
-            },
-            {
-              name: "Org 2",
-              id: "2",
-              slug: "org-2",
-              logo: "",
-              metadata: "",
-              createdAt: new Date(),
-            },
-            {
-              name: "Org 3",
-              id: "3",
-              slug: "org-3",
-              logo: "",
-              metadata: "",
-              createdAt: new Date(),
-            },
-          ];
+          const { data, error } = await authClient.useListOrganizations();
+          if (error) throw error;
+          return data;
         },
         initialPageParam: 1,
         getNextPageParam: (lastPage) => lastPage.length,

@@ -11,7 +11,7 @@ import { treaty } from "@elysiajs/eden";
 import type { App } from "@repo/server";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
-import { organization } from "better-auth/plugins";
+import { organizationClient } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/client";
 import { ac, admin, member, owner } from "@repo/auth";
 // Import the generated route tree
@@ -35,10 +35,10 @@ declare module "@tanstack/react-router" {
 
 const serverClient = treaty<App>("/api");
 const queryClient = new QueryClient();
-const authClient = createAuthClient({
+export const authClient = createAuthClient({
   baseURL: "",
   plugins: [
-    organization({
+    organizationClient({
       ac: ac,
       roles: {
         owner,
