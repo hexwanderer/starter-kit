@@ -8,8 +8,6 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from "@tanstack/react-router"
-
 // Import Routes
 
 import { Route as rootRoute } from "./routes/__root"
@@ -19,20 +17,10 @@ import { Route as LandingIndexImport } from "./routes/_landing/index"
 import { Route as AuthSignUpImport } from "./routes/auth/sign-up"
 import { Route as AuthSignInImport } from "./routes/auth/sign-in"
 import { Route as LandingFeaturesImport } from "./routes/_landing/features"
+import { Route as LandingAboutImport } from "./routes/_landing/about"
 import { Route as AuthenticatedDashboardImport } from "./routes/_authenticated/dashboard"
 
-// Create Virtual Routes
-
-const AboutLazyImport = createFileRoute("/about")()
-const IndexLazyImport = createFileRoute("/")()
-
 // Create/Update Routes
-
-const AboutLazyRoute = AboutLazyImport.update({
-  id: "/about",
-  path: "/about",
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./routes/about.lazy").then((d) => d.Route))
 
 const LandingRoute = LandingImport.update({
   id: "/_landing",
@@ -43,12 +31,6 @@ const AuthenticatedRoute = AuthenticatedImport.update({
   id: "/_authenticated",
   getParentRoute: () => rootRoute,
 } as any)
-
-const IndexLazyRoute = IndexLazyImport.update({
-  id: "/",
-  path: "/",
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./routes/index.lazy").then((d) => d.Route))
 
 const LandingIndexRoute = LandingIndexImport.update({
   id: "/",
@@ -74,6 +56,12 @@ const LandingFeaturesRoute = LandingFeaturesImport.update({
   getParentRoute: () => LandingRoute,
 } as any)
 
+const LandingAboutRoute = LandingAboutImport.update({
+  id: "/about",
+  path: "/about",
+  getParentRoute: () => LandingRoute,
+} as any)
+
 const AuthenticatedDashboardRoute = AuthenticatedDashboardImport.update({
   id: "/dashboard",
   path: "/dashboard",
@@ -84,13 +72,6 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardImport.update({
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    "/": {
-      id: "/"
-      path: "/"
-      fullPath: "/"
-      preLoaderRoute: typeof IndexLazyImport
-      parentRoute: typeof rootRoute
-    }
     "/_authenticated": {
       id: "/_authenticated"
       path: ""
@@ -105,19 +86,19 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof LandingImport
       parentRoute: typeof rootRoute
     }
-    "/about": {
-      id: "/about"
-      path: "/about"
-      fullPath: "/about"
-      preLoaderRoute: typeof AboutLazyImport
-      parentRoute: typeof rootRoute
-    }
     "/_authenticated/dashboard": {
       id: "/_authenticated/dashboard"
       path: "/dashboard"
       fullPath: "/dashboard"
       preLoaderRoute: typeof AuthenticatedDashboardImport
       parentRoute: typeof AuthenticatedImport
+    }
+    "/_landing/about": {
+      id: "/_landing/about"
+      path: "/about"
+      fullPath: "/about"
+      preLoaderRoute: typeof LandingAboutImport
+      parentRoute: typeof LandingImport
     }
     "/_landing/features": {
       id: "/_landing/features"
@@ -165,11 +146,13 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
 )
 
 interface LandingRouteChildren {
+  LandingAboutRoute: typeof LandingAboutRoute
   LandingFeaturesRoute: typeof LandingFeaturesRoute
   LandingIndexRoute: typeof LandingIndexRoute
 }
 
 const LandingRouteChildren: LandingRouteChildren = {
+  LandingAboutRoute: LandingAboutRoute,
   LandingFeaturesRoute: LandingFeaturesRoute,
   LandingIndexRoute: LandingIndexRoute,
 }
@@ -178,32 +161,31 @@ const LandingRouteWithChildren =
   LandingRoute._addFileChildren(LandingRouteChildren)
 
 export interface FileRoutesByFullPath {
-  "/": typeof LandingIndexRoute
   "": typeof LandingRouteWithChildren
-  "/about": typeof AboutLazyRoute
   "/dashboard": typeof AuthenticatedDashboardRoute
+  "/about": typeof LandingAboutRoute
   "/features": typeof LandingFeaturesRoute
   "/auth/sign-in": typeof AuthSignInRoute
   "/auth/sign-up": typeof AuthSignUpRoute
+  "/": typeof LandingIndexRoute
 }
 
 export interface FileRoutesByTo {
-  "/": typeof LandingIndexRoute
   "": typeof AuthenticatedRouteWithChildren
-  "/about": typeof AboutLazyRoute
   "/dashboard": typeof AuthenticatedDashboardRoute
+  "/about": typeof LandingAboutRoute
   "/features": typeof LandingFeaturesRoute
   "/auth/sign-in": typeof AuthSignInRoute
   "/auth/sign-up": typeof AuthSignUpRoute
+  "/": typeof LandingIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  "/": typeof IndexLazyRoute
   "/_authenticated": typeof AuthenticatedRouteWithChildren
   "/_landing": typeof LandingRouteWithChildren
-  "/about": typeof AboutLazyRoute
   "/_authenticated/dashboard": typeof AuthenticatedDashboardRoute
+  "/_landing/about": typeof LandingAboutRoute
   "/_landing/features": typeof LandingFeaturesRoute
   "/auth/sign-in": typeof AuthSignInRoute
   "/auth/sign-up": typeof AuthSignUpRoute
@@ -213,29 +195,28 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | "/"
     | ""
-    | "/about"
     | "/dashboard"
+    | "/about"
     | "/features"
     | "/auth/sign-in"
     | "/auth/sign-up"
+    | "/"
   fileRoutesByTo: FileRoutesByTo
   to:
-    | "/"
     | ""
-    | "/about"
     | "/dashboard"
+    | "/about"
     | "/features"
     | "/auth/sign-in"
     | "/auth/sign-up"
+    | "/"
   id:
     | "__root__"
-    | "/"
     | "/_authenticated"
     | "/_landing"
-    | "/about"
     | "/_authenticated/dashboard"
+    | "/_landing/about"
     | "/_landing/features"
     | "/auth/sign-in"
     | "/auth/sign-up"
@@ -244,19 +225,15 @@ export interface FileRouteTypes {
 }
 
 export interface RootRouteChildren {
-  IndexLazyRoute: typeof IndexLazyRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   LandingRoute: typeof LandingRouteWithChildren
-  AboutLazyRoute: typeof AboutLazyRoute
   AuthSignInRoute: typeof AuthSignInRoute
   AuthSignUpRoute: typeof AuthSignUpRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexLazyRoute: IndexLazyRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   LandingRoute: LandingRouteWithChildren,
-  AboutLazyRoute: AboutLazyRoute,
   AuthSignInRoute: AuthSignInRoute,
   AuthSignUpRoute: AuthSignUpRoute,
 }
@@ -271,16 +248,11 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
         "/_authenticated",
         "/_landing",
-        "/about",
         "/auth/sign-in",
         "/auth/sign-up"
       ]
-    },
-    "/": {
-      "filePath": "index.lazy.tsx"
     },
     "/_authenticated": {
       "filePath": "_authenticated.tsx",
@@ -291,16 +263,18 @@ export const routeTree = rootRoute
     "/_landing": {
       "filePath": "_landing.tsx",
       "children": [
+        "/_landing/about",
         "/_landing/features",
         "/_landing/"
       ]
     },
-    "/about": {
-      "filePath": "about.lazy.tsx"
-    },
     "/_authenticated/dashboard": {
       "filePath": "_authenticated/dashboard.tsx",
       "parent": "/_authenticated"
+    },
+    "/_landing/about": {
+      "filePath": "_landing/about.tsx",
+      "parent": "/_landing"
     },
     "/_landing/features": {
       "filePath": "_landing/features.tsx",

@@ -13,6 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Link } from "@tanstack/react-router";
 
 const signInFormSchema = z.object({
   email: z.string().email().min(1, "Email is required"),
@@ -89,6 +90,14 @@ export function SignIn() {
         >
           Sign In
         </Button>
+
+        <Link to="/auth/sign-up">
+          <Button>Sign Up</Button>
+        </Link>
+
+        <Link to="/">
+          <Button>Cancel</Button>
+        </Link>
       </form>
     </Form>
   );

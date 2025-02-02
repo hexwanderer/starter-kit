@@ -13,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { authMutations } from "@/queries/mutations";
 import { useMutation } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
 
 const signUpFormSchema = z.object({
   email: z.string().email().min(1, "Email is required"),
@@ -106,6 +107,14 @@ export function SignUp() {
         >
           Sign Up
         </Button>
+
+        <Link to="/auth/sign-in">
+          <Button>Sign In</Button>
+        </Link>
+
+        <Link to="/">
+          <Button>Cancel</Button>
+        </Link>
       </form>
     </Form>
   );
