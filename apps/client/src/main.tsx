@@ -12,7 +12,7 @@ import type { App } from "@repo/server";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { organizationClient } from "better-auth/client/plugins";
-import { createAuthClient } from "better-auth/client";
+import { createAuthClient } from "better-auth/react";
 import { ac, admin, member, owner } from "@repo/auth";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
@@ -22,7 +22,7 @@ const router = createRouter({
   routeTree,
   context: {
     // biome-ignore lint/style/noNonNullAssertion: <explanation>
-    auth: undefined!,
+    authClient: undefined!,
   },
 });
 
@@ -39,7 +39,7 @@ export const authClient = createAuthClient({
   baseURL: "",
   plugins: [
     organizationClient({
-      ac: ac,
+      ac,
       roles: {
         owner,
         admin,

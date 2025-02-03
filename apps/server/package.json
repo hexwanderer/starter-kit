@@ -17,7 +17,7 @@
     "@repo/database": "workspace:*",
     "@types/node": "^22.10.10",
     "@types/pg": "^8.11.11",
-    "better-auth": "^1.1.14",
+    "better-auth": "^1.1.15",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.39.0",
     "elysia": "^1.2.10",

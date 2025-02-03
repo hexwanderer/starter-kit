@@ -1,4 +1,5 @@
 import { config } from "dotenv";
+import { ac, admin, member, owner } from "@repo/auth";
 import { db } from "@repo/database"; // your drizzle instance
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
@@ -15,5 +16,16 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  plugins: [organization()],
+  plugins: [
+    organization({
+      ac: ac,
+      roles: {
+        owner,
+        admin,
+        member,
+      },
+    }),
+  ],
 });
+
+export type AuthService = typeof auth;

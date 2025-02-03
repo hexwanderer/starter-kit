@@ -4,6 +4,7 @@ import { auth } from "./auth";
 import { db } from "@repo/database";
 import { config } from "dotenv";
 import { type Context, Elysia } from "elysia";
+import { TeamService } from "./service";
 
 config({ path: "../../.env" });
 
@@ -13,12 +14,13 @@ async function betterAuthMiddleware(context: Context) {
   return await auth.handler(context.request);
 }
 
-console.log(`drizzle.client is ${JSON.stringify(db.$client)}`);
+const service = new TeamService(auth);
 
 export const app = new Elysia({ adapter: node() })
   .state({
     db,
     auth,
+    service,
   })
   .use(cors())
   .all("/api/auth/*", betterAuthMiddleware)

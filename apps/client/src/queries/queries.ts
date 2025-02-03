@@ -3,7 +3,7 @@ import { useServer } from "@/hooks/use-server";
 import type { treaty } from "@elysiajs/eden";
 import type { Organization } from "@repo/database";
 import type { App } from "@repo/server";
-import { infiniteQueryOptions } from "@tanstack/react-query";
+import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
 
 export type EdenClient = ReturnType<typeof treaty<App>>;
 
@@ -26,19 +26,24 @@ export const users = () => {
 };
 
 export const auth = () => {
-  // const { serverClient } = useServer();
   const { authClient } = useAuth();
   return {
     listAllOrganizations: () =>
-      infiniteQueryOptions<any>({
+      queryOptions<Organization[]>({
         queryKey: ["auth", "listAllOrganizations"],
         queryFn: async () => {
-          const { data, error } = await authClient.useListOrganizations();
+          const { data, error } = authClient.useListOrganizations();
           if (error) throw error;
-          return data;
+          if (!data) throw new Error("No data");
+          return data.map((org) => ({
+            id: org.id,
+            name: org.name,
+            slug: org.slug,
+            logo: org.logo ?? null,
+            createdAt: org.createdAt,
+            metadata: org.metadata,
+          }));
         },
-        initialPageParam: 1,
-        getNextPageParam: (lastPage) => lastPage.length,
       }),
   };
 };
