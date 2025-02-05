@@ -22,7 +22,7 @@ const signInFormSchema = z.object({
 
 export type SignInFormSchema = z.infer<typeof signInFormSchema>;
 
-export function SignIn() {
+export function SignIn({ onSuccess }: { onSuccess: () => void }) {
   const form = useForm<SignInFormSchema>({
     defaultValues: {
       email: "",
@@ -38,6 +38,7 @@ export function SignIn() {
     mutationFn: authMutations().signIn,
     onSuccess: () => {
       navigate({ to: "/auth/orgs" });
+      onSuccess();
     },
   });
 

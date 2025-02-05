@@ -1,22 +1,30 @@
 import type { User } from "@repo/database";
 import type { AuthService } from "./auth";
+import { Elysia } from "elysia";
+import type { InferHandler } from "elysia";
+import type { app } from "src";
 
-export class TeamService {
-  auth: AuthService;
-
-  constructor(auth: AuthService) {
-    this.auth = auth;
+type GetTeamHandler = InferHandler<
+  typeof app,
+  "/api/team/:teamId",
+  {
+    params: {
+      teamId: string;
+    };
+    response: {
+      200: string;
+    };
   }
+>;
 
-  async add(name: string, user: User, headers: any) {
-    const resp = await this.auth.api.hasPermission({
-      body: {
-        permission: {
-          team: ["create"],
-        },
-        organizationId: "",
-      },
-      headers: headers,
-    });
-  }
-}
+const getTeam: GetTeamHandler = ({ params, store }) => {
+  const { teamId } = params;
+  return {
+    200: teamId,
+  };
+};
+
+export const teamService = new Elysia({ name: "teamService" }).get(
+  "/",
+  getTeam,
+);

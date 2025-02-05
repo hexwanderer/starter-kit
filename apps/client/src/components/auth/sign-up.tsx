@@ -22,7 +22,7 @@ const signUpFormSchema = z.object({
 
 export type SignUpFormSchema = z.infer<typeof signUpFormSchema>;
 
-export function SignUp() {
+export function SignUp({ onSuccess }: { onSuccess: () => void }) {
   const form = useForm<SignUpFormSchema>({
     defaultValues: {
       email: "",
@@ -35,6 +35,9 @@ export function SignUp() {
   const signUpMutation = useMutation({
     mutationKey: ["auth", "signUp"],
     mutationFn: authMutations().signUp,
+    onSuccess: () => {
+      onSuccess();
+    },
   });
 
   function handleSubmit(data: SignUpFormSchema) {
