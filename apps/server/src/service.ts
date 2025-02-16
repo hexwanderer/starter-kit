@@ -1,30 +1,27 @@
-import type { User } from "@repo/database";
-import type { AuthService } from "./auth";
-import { Elysia } from "elysia";
-import type { InferHandler } from "elysia";
-import type { app } from "src";
+import { Elysia, t } from "elysia";
 
-type GetTeamHandler = InferHandler<
-  typeof app,
-  "/api/team/:teamId",
-  {
-    params: {
-      teamId: string;
-    };
-    response: {
-      200: string;
-    };
-  }
->;
-
-const getTeam: GetTeamHandler = ({ params, store }) => {
-  const { teamId } = params;
-  return {
-    200: teamId,
-  };
-};
-
-export const teamService = new Elysia({ name: "teamService" }).get(
-  "/",
-  getTeam,
-);
+export const teamService = new Elysia({ name: "teamService" })
+  .put(
+    "/team",
+    ({ body }) => {
+      console.log(body);
+    },
+    {
+      body: t.Object({
+        name: t.String(),
+        description: t.String(),
+      }),
+    },
+  )
+  .patch(
+    "/team",
+    ({ body }) => {
+      console.log(body);
+    },
+    {
+      body: t.Object({
+        name: t.String(),
+        description: t.String(),
+      }),
+    },
+  );

@@ -24,26 +24,3 @@ export const users = () => {
       }),
   };
 };
-
-export const auth = () => {
-  const { authClient } = useAuth();
-  return {
-    listAllOrganizations: () =>
-      queryOptions<Organization[]>({
-        queryKey: ["auth", "listAllOrganizations"],
-        queryFn: async () => {
-          const { data, error } = authClient.useListOrganizations();
-          if (error) throw error;
-          if (!data) throw new Error("No data");
-          return data.map((org) => ({
-            id: org.id,
-            name: org.name,
-            slug: org.slug,
-            logo: org.logo ?? null,
-            createdAt: org.createdAt,
-            metadata: org.metadata,
-          }));
-        },
-      }),
-  };
-};

@@ -30,7 +30,10 @@ import {
   SidebarRail,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { useAuth } from "@/hooks/use-auth";
+import { Link } from "@tanstack/react-router";
 import {
+  ArrowLeftRightIcon,
   AudioWaveform,
   BadgeCheck,
   Bell,
@@ -50,7 +53,6 @@ import {
   Sparkles,
   SquareTerminal,
 } from "lucide-react";
-import { useState } from "react";
 
 const data = {
   user: {
@@ -254,7 +256,9 @@ export function TeamSwitcher({
   }[];
 }) {
   const { isMobile } = useSidebar();
-  const [activeTeam, setActiveTeam] = useState(teams[0]);
+  const { authClient } = useAuth();
+  const activeOrganization = authClient.useActiveOrganization();
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -269,15 +273,19 @@ export function TeamSwitcher({
                   isMobile ? "aspect-square size-6" : "aspect-square size-6"
                 }`}
               >
-                <activeTeam.logo
-                  className={`size-4 ${isMobile ? "shrink-0" : ""}`}
-                />
+                {activeOrganization.data && (
+                  <h2>{activeOrganization.data.slug}</h2>
+                )}
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">
-                  {activeTeam.name}
+                  {activeOrganization.data?.name ?? "No organization"}
+                  {activeOrganization.error && (
+                    <span className="text-xs text-red-500">
+                      {activeOrganization.error.message}
+                    </span>
+                  )}
                 </span>
-                <span className="truncate text-xs">{activeTeam.plan}</span>
               </div>
               <ChevronsUpDown className="ml-auto" />
             </SidebarMenuButton>
@@ -294,7 +302,7 @@ export function TeamSwitcher({
             {teams.map((team, index) => (
               <DropdownMenuItem
                 key={team.name}
-                onClick={() => setActiveTeam(team)}
+                // onClick={() => setActiveTeam(team)}
                 className="gap-2 p-2"
               >
                 <div className="flex size-6 items-center justify-center rounded-sm border">
@@ -311,6 +319,17 @@ export function TeamSwitcher({
               </div>
               <div className="font-medium text-muted-foreground">Add team</div>
             </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <Link to="/auth/orgs">
+              <DropdownMenuItem className="gap-2 p-2">
+                <div className="flex size-6 items-center justify-center rounded-md border bg-background">
+                  <ArrowLeftRightIcon className="size-4" />
+                </div>
+                <div className="font-medium text-muted-foreground">
+                  Change organization
+                </div>
+              </DropdownMenuItem>
+            </Link>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>

@@ -1,3 +1,4 @@
+import type { OrganizationCreate } from "@/components/auth/organization-select";
 import type { SignInFormSchema } from "@/components/auth/sign-in";
 import type { SignUpFormSchema } from "@/components/auth/sign-up";
 import { useAuth } from "@/hooks/use-auth";
@@ -24,6 +25,25 @@ export const authMutations = () => {
         name: params.name,
       });
       console.log(error);
+
+      if (error) throw error;
+
+      return data;
+    },
+    organizationCreate: async (params: OrganizationCreate) => {
+      const { data, error } = await authClient.organization.create({
+        name: params.name,
+        slug: params.slug,
+      });
+
+      if (error) throw error;
+
+      return data;
+    },
+    organizationSelect: async (id: string) => {
+      const { data, error } = await authClient.organization.setActive({
+        organizationId: id,
+      });
 
       if (error) throw error;
 
