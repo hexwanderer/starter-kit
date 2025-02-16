@@ -1,4 +1,4 @@
-import { SignOn } from "@/components/auth/sign-on";
+import { SignState } from "@/components/auth/sign-state";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/auth/")({
@@ -6,5 +6,5 @@ export const Route = createFileRoute("/auth/")({
 });
 
 function RouteComponent() {
-  return <SignOn />;
+  return <SignState />;
 }
