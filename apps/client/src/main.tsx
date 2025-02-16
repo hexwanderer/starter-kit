@@ -16,6 +16,7 @@ import { createAuthClient } from "better-auth/react";
 import { ac, admin, member, owner } from "@repo/auth";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
+import { Toaster } from "sonner";
 
 // Create a new router instance
 const router = createRouter({
@@ -70,6 +71,7 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <ProviderTree>
         <InnerApp />
+        <Toaster />
       </ProviderTree>
     </StrictMode>,
   );

@@ -3,12 +3,13 @@ import { AppSidebar } from "@/components/sidebar";
 import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 import { Outlet } from "@tanstack/react-router";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated")({
   beforeLoad: async ({ context }) => {
     const session = await context.authClient.getSession();
-    console.log("session", session);
     if (!session || !session.data?.session) {
+      toast.info("Please sign in or create an account to continue");
       throw redirect({
         to: "/",
       });
@@ -35,9 +36,6 @@ function RouteComponent() {
         <div className="flex-1 overflow-y-auto">
           <Outlet />
         </div>
-
-        {/* Toast Container */}
-        <Toaster />
       </div>
 
       {/* TanStack Router DevTools */}

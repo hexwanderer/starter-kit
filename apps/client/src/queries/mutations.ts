@@ -30,6 +30,13 @@ export const authMutations = () => {
 
       return data;
     },
+    signOut: async () => {
+      const { data, error } = await authClient.signOut();
+
+      if (error) throw error;
+
+      return data;
+    },
     organizationCreate: async (params: OrganizationCreate) => {
       const { data, error } = await authClient.organization.create({
         name: params.name,
