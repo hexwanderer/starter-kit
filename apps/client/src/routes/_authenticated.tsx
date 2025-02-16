@@ -1,7 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { AppSidebar } from "@/components/sidebar";
 import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
-import { Toaster } from "@/components/ui/sonner";
 import { Outlet } from "@tanstack/react-router";
 import { toast } from "sonner";
 

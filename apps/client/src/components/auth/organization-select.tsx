@@ -1,6 +1,6 @@
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Loader2, Plus } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -19,6 +19,7 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useNavigate } from "@tanstack/react-router";
 import { AuthSplitGrid } from "@/components/auth/auth-split-grid";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Organization {
   id: string;
@@ -81,34 +82,50 @@ export function OrganizationSelect() {
 
           {/* Organizations List */}
           <div className="flex-1">
-            {organizationsQuery.data && organizationsQuery.data.length > 0 ? (
-              <div className="h-[400px] overflow-y-auto pr-2 -mr-2 space-y-2">
-                {organizationsQuery.data.map((org: Organization) => (
-                  <Button
-                    key={org.id}
-                    variant="outline"
-                    className="w-full justify-start font-normal"
-                    onClick={() => {
-                      selectOrgMutation.mutate(org.id);
-                    }}
-                  >
-                    <p className="text-sm font-medium">{org.name}</p>
-                    <p className="text-xs text-muted-foreground">{org.slug}</p>
-                  </Button>
+            <div className="h-[400px] overflow-y-auto pr-2 -mr-2 space-y-2">
+              {organizationsQuery.isPending &&
+                Array.from({ length: 5 }).map((_, index) => (
+                  // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                  <div key={index} className="w-full p-2 animate-pulse">
+                    <Skeleton />
+                  </div>
                 ))}
-              </div>
-            ) : (
-              <div className="rounded-md border border-dashed border-muted-foreground/25 p-8">
-                <div className="flex flex-col items-center justify-center text-center space-y-2">
-                  <p className="font-medium text-foreground">
-                    No organizations found
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Add your first organization to get started
-                  </p>
+
+              {organizationsQuery.data && organizationsQuery.data.length > 0 ? (
+                <>
+                  {organizationsQuery.data.map((org: Organization) => (
+                    <Button
+                      key={org.id}
+                      variant="outline"
+                      className="w-full justify-start font-normal"
+                      onClick={() => {
+                        selectOrgMutation.mutate(org.id);
+                      }}
+                      disabled={selectOrgMutation.isPending}
+                    >
+                      <span className="text-sm font-medium">{org.name}</span>
+                      <p className="text-xs text-muted-foreground">
+                        {org.slug}
+                      </p>
+                      {selectOrgMutation.isPending && (
+                        <Loader2 className="h-4 w-4 text-gray-400 animate-spin" />
+                      )}
+                    </Button>
+                  ))}
+                </>
+              ) : (
+                <div className="rounded-md border border-dashed border-muted-foreground/25 p-8">
+                  <div className="flex flex-col items-center justify-center text-center space-y-2">
+                    <p className="font-medium text-foreground">
+                      No organizations found
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Add your first organization to get started
+                    </p>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
 
             {/* Add Organization Button */}
             <DialogTrigger asChild>
@@ -117,7 +134,7 @@ export function OrganizationSelect() {
                 className="w-full h-12 text-sm font-medium mt-4"
               >
                 <Plus className="mr-2 h-4 w-4" />
-                Add Organization
+                <span>Add Organization</span>
               </Button>
             </DialogTrigger>
           </div>
