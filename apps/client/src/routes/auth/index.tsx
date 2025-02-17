@@ -1,4 +1,4 @@
-import { SignState } from "@/components/auth/sign-state";
+import { SignState } from "@/features/auth/components/sign-state";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/auth/")({

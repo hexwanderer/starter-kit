@@ -1,6 +1,5 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useState } from "react";
-import { authMutations } from "@/queries/mutations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -16,7 +15,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "@tanstack/react-router";
-import { AuthSplitGrid } from "@/components/auth/auth-split-grid";
+import { AuthSplitGrid } from "@/features/auth/components/auth-split-grid";
+import { userManagementMutations } from "../api/mutations";
 
 export function SignState() {
   const [tab, setTab] = useState<"signin" | "signup">("signin");
@@ -90,7 +90,7 @@ function SignIn() {
 
   const signInMutation = useMutation({
     mutationKey: ["auth", "signIn"],
-    mutationFn: authMutations().signIn,
+    mutationFn: userManagementMutations().signIn,
     onSuccess: () => {
       navigate({ to: "/auth/orgs" });
     },
@@ -176,7 +176,7 @@ function SignUp() {
 
   const signUpMutation = useMutation({
     mutationKey: ["auth", "signUp"],
-    mutationFn: authMutations().signUp,
+    mutationFn: userManagementMutations().signUp,
     onSuccess: () => {
       navigate({ to: "/auth/orgs" });
     },

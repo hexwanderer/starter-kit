@@ -1,4 +1,4 @@
-import { useAuth } from "@/hooks/use-auth";
+import { useAuth } from "@/features/auth/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { Loader2, Plus } from "lucide-react";
 import {
@@ -14,12 +14,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormField, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { authMutations } from "@/queries/mutations";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useNavigate } from "@tanstack/react-router";
-import { AuthSplitGrid } from "@/components/auth/auth-split-grid";
+import { AuthSplitGrid } from "@/features/auth/components/auth-split-grid";
 import { Skeleton } from "@/components/ui/skeleton";
+import { organizationManagementMutations } from "../api/mutations";
 
 interface Organization {
   id: string;
@@ -46,7 +46,7 @@ export function OrganizationSelect() {
 
   const createOrgMutation = useMutation({
     mutationKey: ["auth", "organizationCreate"],
-    mutationFn: authMutations().organizationCreate,
+    mutationFn: organizationManagementMutations().organizationCreate,
     onSuccess: () => {
       toast.success("Organization created successfully");
       navigate({ to: "/dashboard" });
@@ -55,7 +55,7 @@ export function OrganizationSelect() {
 
   const selectOrgMutation = useMutation({
     mutationKey: ["auth", "organizationSelect"],
-    mutationFn: authMutations().organizationSelect,
+    mutationFn: organizationManagementMutations().organizationSelect,
     onSuccess: () => {
       toast.success("Organization selected successfully");
       navigate({ to: "/dashboard" });

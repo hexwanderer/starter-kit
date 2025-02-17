@@ -30,8 +30,8 @@ import {
   SidebarRail,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { useAuth } from "@/hooks/use-auth";
-import { authMutations } from "@/queries/mutations";
+import { userManagementMutations } from "@/features/auth/api/mutations";
+import { useAuth } from "@/features/auth/hooks/use-auth";
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 import {
@@ -53,9 +53,9 @@ import {
   Plus,
   Settings2,
   Settings2Icon,
-  Sparkles,
   SquareTerminal,
 } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
 
 const data = {
@@ -262,6 +262,11 @@ export function TeamSwitcher({
   const { isMobile } = useSidebar();
   const { authClient } = useAuth();
   const activeOrganization = authClient.useActiveOrganization();
+  const [activeTeam] = useState({
+    name: "Acme Inc",
+    logo: GalleryVerticalEnd,
+    plan: "Enterprise",
+  });
 
   return (
     <SidebarMenu>
@@ -272,24 +277,29 @@ export function TeamSwitcher({
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <div
-                className={`flex items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground ${
-                  isMobile ? "aspect-square size-6" : "aspect-square size-6"
-                }`}
-              >
-                {activeOrganization.data && (
-                  <h2>{activeOrganization.data.slug}</h2>
-                )}
-              </div>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">
-                  {activeOrganization.data?.name ?? "No organization"}
-                  {activeOrganization.error && (
-                    <span className="text-xs text-red-500">
-                      {activeOrganization.error.message}
-                    </span>
-                  )}
-                </span>
+              <div className="flex gap-2 items-center">
+                <div className="flex -space-x-4 *:ring *:ring-background">
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage alt={activeOrganization.data?.name} />
+                    <AvatarFallback className="rounded-lg">
+                      {activeOrganization.data?.slug}
+                    </AvatarFallback>
+                  </Avatar>
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage alt={activeTeam.name} />
+                    <AvatarFallback className="rounded-lg">
+                      {activeTeam.name}
+                    </AvatarFallback>
+                  </Avatar>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <span className="text-sm font-medium">
+                    {activeOrganization.data?.name}
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    {activeTeam.name}
+                  </span>
+                </div>
               </div>
               <ChevronsUpDown className="ml-auto" />
             </SidebarMenuButton>
@@ -324,6 +334,20 @@ export function TeamSwitcher({
               <div className="font-medium text-muted-foreground">Add team</div>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
+            <Link
+              to="/organizations/$organizationId/settings"
+              params={{ organizationId: activeOrganization.data?.id ?? "" }}
+            >
+              <DropdownMenuItem className="gap-2 p-2">
+                <div className="flex size-6 items-center justify-center rounded-md border bg-background">
+                  <Settings2Icon className="size-4" />
+                </div>
+                <div className="font-medium text-muted-foreground">
+                  Organization Settings
+                </div>
+              </DropdownMenuItem>
+            </Link>
+            <DropdownMenuSeparator />
             <Link to="/auth/orgs">
               <DropdownMenuItem className="gap-2 p-2">
                 <div className="flex size-6 items-center justify-center rounded-md border bg-background">
@@ -356,7 +380,7 @@ export function NavUser({
   const navigate = useNavigate();
   const logOutMutation = useMutation({
     mutationKey: ["auth", "signOut"],
-    mutationFn: authMutations().signOut,
+    mutationFn: userManagementMutations().signOut,
     onSuccess: () => {
       toast.success("You have been logged out successfully");
       navigate({ to: "/" });

@@ -1,4 +1,4 @@
-import { OrganizationSelect } from "@/components/auth/organization-select";
+import { OrganizationSelect } from "@/features/auth/components/organization-select";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { toast } from "sonner";
 

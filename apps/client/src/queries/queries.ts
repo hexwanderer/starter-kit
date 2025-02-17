@@ -1,9 +1,7 @@
-import { useAuth } from "@/hooks/use-auth";
 import { useServer } from "@/hooks/use-server";
 import type { treaty } from "@elysiajs/eden";
-import type { Organization } from "@repo/database";
 import type { App } from "@repo/server";
-import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
+import { infiniteQueryOptions } from "@tanstack/react-query";
 
 export type EdenClient = ReturnType<typeof treaty<App>>;
 
