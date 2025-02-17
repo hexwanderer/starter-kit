@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { toast } from "sonner";
 import { SaveIcon, TrashIcon } from "lucide-react";
-import { Card, CardTitle } from "../ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 interface Organization {
   id: string;
@@ -24,7 +24,11 @@ const orgUpdateSchema = z.object({
 
 export type OrganizationUpdate = z.infer<typeof orgUpdateSchema>;
 
-export function OrganizationManage(organization: Organization) {
+interface OrganizationManageProps {
+  organization: Organization;
+}
+
+export function OrganizationManage({ organization }: OrganizationManageProps) {
   const form = useForm<OrganizationUpdate>({
     resolver: zodResolver(orgUpdateSchema),
     defaultValues: {
@@ -70,60 +74,68 @@ export function OrganizationManage(organization: Organization) {
   return (
     <>
       <Card className="flex-grow w-full h-full">
-        <CardTitle>Organization Settings</CardTitle>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleSubmit)}>
-            <div className="flex flex-col gap-4">
-              <FormField
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <Input
-                      {...field}
-                      className="w-full"
-                      placeholder="Name"
-                      required
-                    />
-                  </FormItem>
+        <CardHeader>
+          <CardTitle>Organization Settings</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(handleSubmit)}>
+              <div className="flex flex-col gap-4">
+                <FormField
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <Input
+                        {...field}
+                        className="w-full"
+                        placeholder="Name"
+                        required
+                      />
+                    </FormItem>
+                  )}
+                />
+                {form.formState.errors.name && (
+                  <FormMessage>
+                    {form.formState.errors.name.message}
+                  </FormMessage>
                 )}
-              />
-              {form.formState.errors.name && (
-                <FormMessage>{form.formState.errors.name.message}</FormMessage>
-              )}
 
-              <FormField
-                name="slug"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Slug</FormLabel>
-                    <Input
-                      {...field}
-                      className="w-full"
-                      placeholder="Slug"
-                      required
-                    />
-                  </FormItem>
+                <FormField
+                  name="slug"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Slug</FormLabel>
+                      <Input
+                        {...field}
+                        className="w-full"
+                        placeholder="Slug"
+                        required
+                      />
+                    </FormItem>
+                  )}
+                />
+                {form.formState.errors.slug && (
+                  <FormMessage>
+                    {form.formState.errors.slug.message}
+                  </FormMessage>
                 )}
-              />
-              {form.formState.errors.slug && (
-                <FormMessage>{form.formState.errors.slug.message}</FormMessage>
-              )}
 
-              <Button type="submit" variant="outline" className="w-full">
-                <SaveIcon />
-                <span>Save</span>
-              </Button>
-            </div>
-          </form>
-        </Form>
-        <Button
-          variant="destructive"
-          onClick={() => deleteOrgMutation.mutate(organization.id)}
-        >
-          <TrashIcon />
-          <span>Delete</span>
-        </Button>
+                <Button type="submit" variant="outline" className="w-full">
+                  <SaveIcon />
+                  <span>Save</span>
+                </Button>
+              </div>
+            </form>
+          </Form>
+          <Button
+            variant="destructive"
+            onClick={() => deleteOrgMutation.mutate(organization.id)}
+          >
+            <TrashIcon />
+            <span>Delete</span>
+          </Button>
+        </CardContent>
       </Card>
     </>
   );

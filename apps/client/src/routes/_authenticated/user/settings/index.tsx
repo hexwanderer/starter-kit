@@ -1,8 +1,19 @@
+import {
+  SettingsTabs,
+  SettingsTabsContent,
+  SettingsTabsList,
+  SettingsTabsTrigger,
+} from "@/components/settings-tabs";
 import { Button } from "@/components/ui/button";
-import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Form, FormField, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/hooks/use-auth";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { authMutations } from "@/queries/mutations";
@@ -23,49 +34,28 @@ function RouteComponent() {
   return (
     <>
       <h2>Settings</h2>
-      <Tabs
-        defaultValue="tab-1"
-        orientation={isMobile ? "horizontal" : "vertical"}
-        className={`flex ${isMobile ? "flex-col" : "flex-row"} w-full h-auto gap-2 p-4`}
-      >
-        <TabsList
-          className={`flex ${isMobile ? "flex-row" : "flex-col"} items-start self-start rounded-none border-l border-border bg-transparent p-0`}
-        >
-          <TabsTrigger
-            value="tab-1"
-            className="relative w-full justify-start rounded-none after:absolute after:inset-y-0 after:start-0 after:w-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:after:bg-primary"
-          >
-            Profile
-          </TabsTrigger>
-          <TabsTrigger
-            value="tab-2"
-            className="relative w-full justify-start rounded-none after:absolute after:inset-y-0 after:start-0 after:w-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:after:bg-primary"
-          >
-            Projects
-          </TabsTrigger>
-          <TabsTrigger
-            value="tab-3"
-            className="relative w-full justify-start rounded-none after:absolute after:inset-y-0 after:start-0 after:w-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:after:bg-primary"
-          >
-            Packages
-          </TabsTrigger>
-        </TabsList>
+      <SettingsTabs defaultValue="tab-1" isMobile={isMobile}>
+        <SettingsTabsList>
+          <SettingsTabsTrigger value="tab-1">Profile</SettingsTabsTrigger>
+          <SettingsTabsTrigger value="tab-2">Projects</SettingsTabsTrigger>
+          <SettingsTabsTrigger value="tab-3">Packages</SettingsTabsTrigger>
+        </SettingsTabsList>
         <div className="flex max-w-lg mx-auto w-full">
-          <TabsContent value="tab-1" className="w-full">
+          <SettingsTabsContent value="tab-1">
             <Profile />
-          </TabsContent>
-          <TabsContent value="tab-2" className="w-full">
+          </SettingsTabsContent>
+          <SettingsTabsContent value="tab-2">
             <p className="px-4 py-1.5 text-xs text-muted-foreground">
               Content for Tab 2
             </p>
-          </TabsContent>
-          <TabsContent value="tab-3 " className="w-full">
+          </SettingsTabsContent>
+          <SettingsTabsContent value="tab-3 ">
             <p className="px-4 py-1.5 text-xs text-muted-foreground">
               Content for Tab 3
             </p>
-          </TabsContent>
+          </SettingsTabsContent>
         </div>
-      </Tabs>
+      </SettingsTabs>
     </>
   );
 }
@@ -121,7 +111,7 @@ function Profile() {
       <CardHeader>
         <CardTitle>Profile</CardTitle>
       </CardHeader>
-      <div className="p-4">
+      <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSubmit)}>
             <div className="flex flex-col gap-4">
@@ -180,7 +170,7 @@ function Profile() {
             </div>
           </form>
         </Form>
-      </div>
+      </CardContent>
       <CardFooter>
         <Button variant="outline" className="w-full h-12 text-sm font-medium">
           <SaveIcon />
