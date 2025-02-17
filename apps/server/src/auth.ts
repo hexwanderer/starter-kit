@@ -16,6 +16,17 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+  user: {
+    changeEmail: {
+      enabled: true,
+      sendChangeEmailVerification: async (
+        { user, newEmail, url, token },
+        request,
+      ) => {
+        console.log("sendChangeEmailVerification", user, newEmail, url, token);
+      },
+    },
+  },
   plugins: [
     organization({
       ac: ac,

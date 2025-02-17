@@ -52,6 +52,7 @@ import {
   type LucideIcon,
   Plus,
   Settings2,
+  Settings2Icon,
   Sparkles,
   SquareTerminal,
 } from "lucide-react";
@@ -416,10 +417,12 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
+              <Link to="/user/settings" className="flex items-center gap-2">
+                <DropdownMenuItem>
+                  <Settings2Icon />
+                  Settings
+                </DropdownMenuItem>
+              </Link>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>

@@ -6,10 +6,5 @@ export const Route = createRootRouteWithContext<AuthContextType>()({
 });
 
 function RouteComponent() {
-  return (
-    <div>
-      <Outlet />
-      {/* <TanStackRouterDevtools position="bottom-right" /> */}
-    </div>
-  );
+  return <Outlet />;
 }

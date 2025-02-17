@@ -20,19 +20,19 @@ export const Route = createFileRoute("/_authenticated")({
 function RouteComponent() {
   const { isMobile } = useSidebar();
   return (
-    <div className="flex h-screen w-full">
+    <div className="flex flex-grow h-screen w-full">
       {/* Sidebar */}
       <AppSidebar className="hidden lg:block w-64 bg-gray-800 text-white" />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex flex-1 flex-col w-full">
         {/* Sidebar Trigger */}
         <div className={`fixed bottom-4 left-4 ${isMobile ? "" : "hidden"}`}>
           <SidebarTrigger />
         </div>
 
         {/* Main Outlet Content */}
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 w-full overflow-y-auto p-4">
           <Outlet />
         </div>
       </div>

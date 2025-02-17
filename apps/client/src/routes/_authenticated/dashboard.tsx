@@ -11,7 +11,7 @@ function RouteComponent() {
 
   return (
     <>
-      <div>{`Hello! Active organziation is ${activeOrg.data?.name ?? "unknown"}`}</div>
+      <div>{`Hello! Active organziation is ${activeOrg.data?.id ?? "unknown"}`}</div>
     </>
   );
 }

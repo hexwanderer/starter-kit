@@ -10,211 +10,231 @@
 
 // Import Routes
 
-import { Route as rootRoute } from "./routes/__root";
-import { Route as LandingImport } from "./routes/_landing";
-import { Route as AuthenticatedImport } from "./routes/_authenticated";
-import { Route as AuthIndexImport } from "./routes/auth/index";
-import { Route as LandingIndexImport } from "./routes/_landing/index";
-import { Route as AuthOrgsImport } from "./routes/auth/orgs";
-import { Route as LandingFeaturesImport } from "./routes/_landing/features";
-import { Route as LandingAboutImport } from "./routes/_landing/about";
-import { Route as AuthenticatedDashboardImport } from "./routes/_authenticated/dashboard";
-import { Route as AuthenticatedSettingsIndexImport } from "./routes/_authenticated/settings/index";
+import { Route as rootRoute } from "./routes/__root"
+import { Route as LandingImport } from "./routes/_landing"
+import { Route as AuthenticatedImport } from "./routes/_authenticated"
+import { Route as AuthIndexImport } from "./routes/auth/index"
+import { Route as LandingIndexImport } from "./routes/_landing/index"
+import { Route as AuthOrgsImport } from "./routes/auth/orgs"
+import { Route as LandingFeaturesImport } from "./routes/_landing/features"
+import { Route as LandingAboutImport } from "./routes/_landing/about"
+import { Route as AuthenticatedDashboardImport } from "./routes/_authenticated/dashboard"
+import { Route as AuthenticatedUserSettingsIndexImport } from "./routes/_authenticated/user/settings/index"
+import { Route as AuthenticatedOrganizationsOrganizationIdSettingsImport } from "./routes/_authenticated/organizations/$organizationId/settings"
 
 // Create/Update Routes
 
 const LandingRoute = LandingImport.update({
   id: "/_landing",
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const AuthenticatedRoute = AuthenticatedImport.update({
   id: "/_authenticated",
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const AuthIndexRoute = AuthIndexImport.update({
   id: "/auth/",
   path: "/auth/",
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const LandingIndexRoute = LandingIndexImport.update({
   id: "/",
   path: "/",
   getParentRoute: () => LandingRoute,
-} as any);
+} as any)
 
 const AuthOrgsRoute = AuthOrgsImport.update({
   id: "/auth/orgs",
   path: "/auth/orgs",
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const LandingFeaturesRoute = LandingFeaturesImport.update({
   id: "/features",
   path: "/features",
   getParentRoute: () => LandingRoute,
-} as any);
+} as any)
 
 const LandingAboutRoute = LandingAboutImport.update({
   id: "/about",
   path: "/about",
   getParentRoute: () => LandingRoute,
-} as any);
+} as any)
 
 const AuthenticatedDashboardRoute = AuthenticatedDashboardImport.update({
   id: "/dashboard",
   path: "/dashboard",
   getParentRoute: () => AuthenticatedRoute,
-} as any);
+} as any)
 
-const AuthenticatedSettingsIndexRoute = AuthenticatedSettingsIndexImport.update(
-  {
-    id: "/settings/",
-    path: "/settings/",
+const AuthenticatedUserSettingsIndexRoute =
+  AuthenticatedUserSettingsIndexImport.update({
+    id: "/user/settings/",
+    path: "/user/settings/",
     getParentRoute: () => AuthenticatedRoute,
-  } as any,
-);
+  } as any)
+
+const AuthenticatedOrganizationsOrganizationIdSettingsRoute =
+  AuthenticatedOrganizationsOrganizationIdSettingsImport.update({
+    id: "/organizations/$organizationId/settings",
+    path: "/organizations/$organizationId/settings",
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
     "/_authenticated": {
-      id: "/_authenticated";
-      path: "";
-      fullPath: "";
-      preLoaderRoute: typeof AuthenticatedImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: "/_authenticated"
+      path: ""
+      fullPath: ""
+      preLoaderRoute: typeof AuthenticatedImport
+      parentRoute: typeof rootRoute
+    }
     "/_landing": {
-      id: "/_landing";
-      path: "";
-      fullPath: "";
-      preLoaderRoute: typeof LandingImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: "/_landing"
+      path: ""
+      fullPath: ""
+      preLoaderRoute: typeof LandingImport
+      parentRoute: typeof rootRoute
+    }
     "/_authenticated/dashboard": {
-      id: "/_authenticated/dashboard";
-      path: "/dashboard";
-      fullPath: "/dashboard";
-      preLoaderRoute: typeof AuthenticatedDashboardImport;
-      parentRoute: typeof AuthenticatedImport;
-    };
+      id: "/_authenticated/dashboard"
+      path: "/dashboard"
+      fullPath: "/dashboard"
+      preLoaderRoute: typeof AuthenticatedDashboardImport
+      parentRoute: typeof AuthenticatedImport
+    }
     "/_landing/about": {
-      id: "/_landing/about";
-      path: "/about";
-      fullPath: "/about";
-      preLoaderRoute: typeof LandingAboutImport;
-      parentRoute: typeof LandingImport;
-    };
+      id: "/_landing/about"
+      path: "/about"
+      fullPath: "/about"
+      preLoaderRoute: typeof LandingAboutImport
+      parentRoute: typeof LandingImport
+    }
     "/_landing/features": {
-      id: "/_landing/features";
-      path: "/features";
-      fullPath: "/features";
-      preLoaderRoute: typeof LandingFeaturesImport;
-      parentRoute: typeof LandingImport;
-    };
+      id: "/_landing/features"
+      path: "/features"
+      fullPath: "/features"
+      preLoaderRoute: typeof LandingFeaturesImport
+      parentRoute: typeof LandingImport
+    }
     "/auth/orgs": {
-      id: "/auth/orgs";
-      path: "/auth/orgs";
-      fullPath: "/auth/orgs";
-      preLoaderRoute: typeof AuthOrgsImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: "/auth/orgs"
+      path: "/auth/orgs"
+      fullPath: "/auth/orgs"
+      preLoaderRoute: typeof AuthOrgsImport
+      parentRoute: typeof rootRoute
+    }
     "/_landing/": {
-      id: "/_landing/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof LandingIndexImport;
-      parentRoute: typeof LandingImport;
-    };
+      id: "/_landing/"
+      path: "/"
+      fullPath: "/"
+      preLoaderRoute: typeof LandingIndexImport
+      parentRoute: typeof LandingImport
+    }
     "/auth/": {
-      id: "/auth/";
-      path: "/auth";
-      fullPath: "/auth";
-      preLoaderRoute: typeof AuthIndexImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/_authenticated/settings/": {
-      id: "/_authenticated/settings/";
-      path: "/settings";
-      fullPath: "/settings";
-      preLoaderRoute: typeof AuthenticatedSettingsIndexImport;
-      parentRoute: typeof AuthenticatedImport;
-    };
+      id: "/auth/"
+      path: "/auth"
+      fullPath: "/auth"
+      preLoaderRoute: typeof AuthIndexImport
+      parentRoute: typeof rootRoute
+    }
+    "/_authenticated/organizations/$organizationId/settings": {
+      id: "/_authenticated/organizations/$organizationId/settings"
+      path: "/organizations/$organizationId/settings"
+      fullPath: "/organizations/$organizationId/settings"
+      preLoaderRoute: typeof AuthenticatedOrganizationsOrganizationIdSettingsImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    "/_authenticated/user/settings/": {
+      id: "/_authenticated/user/settings/"
+      path: "/user/settings"
+      fullPath: "/user/settings"
+      preLoaderRoute: typeof AuthenticatedUserSettingsIndexImport
+      parentRoute: typeof AuthenticatedImport
+    }
   }
 }
 
 // Create and export the route tree
 
 interface AuthenticatedRouteChildren {
-  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute;
-  AuthenticatedSettingsIndexRoute: typeof AuthenticatedSettingsIndexRoute;
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedOrganizationsOrganizationIdSettingsRoute: typeof AuthenticatedOrganizationsOrganizationIdSettingsRoute
+  AuthenticatedUserSettingsIndexRoute: typeof AuthenticatedUserSettingsIndexRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
-  AuthenticatedSettingsIndexRoute: AuthenticatedSettingsIndexRoute,
-};
+  AuthenticatedOrganizationsOrganizationIdSettingsRoute:
+    AuthenticatedOrganizationsOrganizationIdSettingsRoute,
+  AuthenticatedUserSettingsIndexRoute: AuthenticatedUserSettingsIndexRoute,
+}
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
   AuthenticatedRouteChildren,
-);
+)
 
 interface LandingRouteChildren {
-  LandingAboutRoute: typeof LandingAboutRoute;
-  LandingFeaturesRoute: typeof LandingFeaturesRoute;
-  LandingIndexRoute: typeof LandingIndexRoute;
+  LandingAboutRoute: typeof LandingAboutRoute
+  LandingFeaturesRoute: typeof LandingFeaturesRoute
+  LandingIndexRoute: typeof LandingIndexRoute
 }
 
 const LandingRouteChildren: LandingRouteChildren = {
   LandingAboutRoute: LandingAboutRoute,
   LandingFeaturesRoute: LandingFeaturesRoute,
   LandingIndexRoute: LandingIndexRoute,
-};
+}
 
 const LandingRouteWithChildren =
-  LandingRoute._addFileChildren(LandingRouteChildren);
+  LandingRoute._addFileChildren(LandingRouteChildren)
 
 export interface FileRoutesByFullPath {
-  "": typeof LandingRouteWithChildren;
-  "/dashboard": typeof AuthenticatedDashboardRoute;
-  "/about": typeof LandingAboutRoute;
-  "/features": typeof LandingFeaturesRoute;
-  "/auth/orgs": typeof AuthOrgsRoute;
-  "/": typeof LandingIndexRoute;
-  "/auth": typeof AuthIndexRoute;
-  "/settings": typeof AuthenticatedSettingsIndexRoute;
+  "": typeof LandingRouteWithChildren
+  "/dashboard": typeof AuthenticatedDashboardRoute
+  "/about": typeof LandingAboutRoute
+  "/features": typeof LandingFeaturesRoute
+  "/auth/orgs": typeof AuthOrgsRoute
+  "/": typeof LandingIndexRoute
+  "/auth": typeof AuthIndexRoute
+  "/organizations/$organizationId/settings": typeof AuthenticatedOrganizationsOrganizationIdSettingsRoute
+  "/user/settings": typeof AuthenticatedUserSettingsIndexRoute
 }
 
 export interface FileRoutesByTo {
-  "": typeof AuthenticatedRouteWithChildren;
-  "/dashboard": typeof AuthenticatedDashboardRoute;
-  "/about": typeof LandingAboutRoute;
-  "/features": typeof LandingFeaturesRoute;
-  "/auth/orgs": typeof AuthOrgsRoute;
-  "/": typeof LandingIndexRoute;
-  "/auth": typeof AuthIndexRoute;
-  "/settings": typeof AuthenticatedSettingsIndexRoute;
+  "": typeof AuthenticatedRouteWithChildren
+  "/dashboard": typeof AuthenticatedDashboardRoute
+  "/about": typeof LandingAboutRoute
+  "/features": typeof LandingFeaturesRoute
+  "/auth/orgs": typeof AuthOrgsRoute
+  "/": typeof LandingIndexRoute
+  "/auth": typeof AuthIndexRoute
+  "/organizations/$organizationId/settings": typeof AuthenticatedOrganizationsOrganizationIdSettingsRoute
+  "/user/settings": typeof AuthenticatedUserSettingsIndexRoute
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  "/_authenticated": typeof AuthenticatedRouteWithChildren;
-  "/_landing": typeof LandingRouteWithChildren;
-  "/_authenticated/dashboard": typeof AuthenticatedDashboardRoute;
-  "/_landing/about": typeof LandingAboutRoute;
-  "/_landing/features": typeof LandingFeaturesRoute;
-  "/auth/orgs": typeof AuthOrgsRoute;
-  "/_landing/": typeof LandingIndexRoute;
-  "/auth/": typeof AuthIndexRoute;
-  "/_authenticated/settings/": typeof AuthenticatedSettingsIndexRoute;
+  __root__: typeof rootRoute
+  "/_authenticated": typeof AuthenticatedRouteWithChildren
+  "/_landing": typeof LandingRouteWithChildren
+  "/_authenticated/dashboard": typeof AuthenticatedDashboardRoute
+  "/_landing/about": typeof LandingAboutRoute
+  "/_landing/features": typeof LandingFeaturesRoute
+  "/auth/orgs": typeof AuthOrgsRoute
+  "/_landing/": typeof LandingIndexRoute
+  "/auth/": typeof AuthIndexRoute
+  "/_authenticated/organizations/$organizationId/settings": typeof AuthenticatedOrganizationsOrganizationIdSettingsRoute
+  "/_authenticated/user/settings/": typeof AuthenticatedUserSettingsIndexRoute
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
+  fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ""
     | "/dashboard"
@@ -223,8 +243,9 @@ export interface FileRouteTypes {
     | "/auth/orgs"
     | "/"
     | "/auth"
-    | "/settings";
-  fileRoutesByTo: FileRoutesByTo;
+    | "/organizations/$organizationId/settings"
+    | "/user/settings"
+  fileRoutesByTo: FileRoutesByTo
   to:
     | ""
     | "/dashboard"
@@ -233,7 +254,8 @@ export interface FileRouteTypes {
     | "/auth/orgs"
     | "/"
     | "/auth"
-    | "/settings";
+    | "/organizations/$organizationId/settings"
+    | "/user/settings"
   id:
     | "__root__"
     | "/_authenticated"
@@ -244,15 +266,16 @@ export interface FileRouteTypes {
     | "/auth/orgs"
     | "/_landing/"
     | "/auth/"
-    | "/_authenticated/settings/";
-  fileRoutesById: FileRoutesById;
+    | "/_authenticated/organizations/$organizationId/settings"
+    | "/_authenticated/user/settings/"
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren;
-  LandingRoute: typeof LandingRouteWithChildren;
-  AuthOrgsRoute: typeof AuthOrgsRoute;
-  AuthIndexRoute: typeof AuthIndexRoute;
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  LandingRoute: typeof LandingRouteWithChildren
+  AuthOrgsRoute: typeof AuthOrgsRoute
+  AuthIndexRoute: typeof AuthIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -260,11 +283,11 @@ const rootRouteChildren: RootRouteChildren = {
   LandingRoute: LandingRouteWithChildren,
   AuthOrgsRoute: AuthOrgsRoute,
   AuthIndexRoute: AuthIndexRoute,
-};
+}
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
 /* ROUTE_MANIFEST_START
 {
@@ -282,7 +305,8 @@ export const routeTree = rootRoute
       "filePath": "_authenticated.tsx",
       "children": [
         "/_authenticated/dashboard",
-        "/_authenticated/settings/"
+        "/_authenticated/organizations/$organizationId/settings",
+        "/_authenticated/user/settings/"
       ]
     },
     "/_landing": {
@@ -315,8 +339,12 @@ export const routeTree = rootRoute
     "/auth/": {
       "filePath": "auth/index.tsx"
     },
-    "/_authenticated/settings/": {
-      "filePath": "_authenticated/settings/index.tsx",
+    "/_authenticated/organizations/$organizationId/settings": {
+      "filePath": "_authenticated/organizations/$organizationId/settings.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/user/settings/": {
+      "filePath": "_authenticated/user/settings/index.tsx",
       "parent": "/_authenticated"
     }
   }
