@@ -12,3 +12,5 @@ const client = new Pool({
 });
 
 export const db = drizzle(client, { schema });
+
+export type DatabaseHandler = typeof db;

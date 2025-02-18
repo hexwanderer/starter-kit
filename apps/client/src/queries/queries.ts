@@ -13,7 +13,7 @@ export const users = () => {
       infiniteQueryOptions({
         queryKey: ["users"],
         queryFn: async () => {
-          const response = await serverClient.index.get();
+          const response = await serverClient.api.index.get();
           if (response.error) throw response.error;
           return response.data;
         },
