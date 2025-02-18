@@ -1,5 +1,6 @@
 import { useServer } from "@/hooks/use-server";
 import { queryOptions } from "@tanstack/react-query";
+import type { Resource } from "@repo/server";
 
 export const resourceQueries = () => {
   const { serverClient } = useServer();
@@ -8,8 +9,9 @@ export const resourceQueries = () => {
     getAll: queryOptions({
       queryKey: ["resources"],
       queryFn: async () => {
-        const resp = await serverClient.api.resources.all.get();
-        if (resp.error) throw resp.error;
+        const { data, error } = await serverClient.api.resources.all.get();
+        if (error) throw error;
+        return data as Resource[];
       },
     }),
     getById: (id: string) => {
